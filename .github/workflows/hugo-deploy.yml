@@ -37,7 +37,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4  # 第三方成熟的「部署 Pages」插件
         with:
           # 4.1 自动获取 GitHub 内置的令牌（无需手动配置，权限足够）
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.DEPLOY_TOKEN }}
           # 4.2 要部署的目录：就是 Hugo 构建出的 public 目录
           publish_dir: ./public
           # 4.3 你的 Pages 仓库地址（替换成你的！已适配）
