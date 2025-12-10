@@ -1,0 +1,74 @@
+/* ===== 命运石之门主题风格 ===== */
+/* 1. 博客标题：标志性深红色 + 加粗 */
+h1.site-title {
+  color: #D62828 !important; /* 命运石之门核心红，!important 确保覆盖主题默认 */
+  font-weight: bold !important;
+}
+
+/* 2. 头像优化：增大尺寸 + 深蓝边框（贴合动画色调） */
+.avatar-img {
+  width: 80px !important;
+  height: 80px !important;
+  border-radius: 50% !important; /* 保持圆形 */
+  border: 2px solid #003049 !important; /* 动画里的深蓝色调 */
+}
+
+/* ===== 排版舒适度优化 ===== */
+/* 1. 加宽内容区：避免拥挤，居中显示 */
+.container, .main-content, .post-content {
+  max-width: 1000px !important; /* 比默认700px更舒展 */
+  margin: 0 auto !important;
+  padding: 30px 40px !important;
+}
+
+/* 2. 全局样式：合并重复的body，加淡纹理背景 + 适配中文的字体/行高 */
+body {
+  /* 命运石之门淡纹理背景（可选），先设底色+透明度，再叠加背景图 */
+  background-color: rgba(0, 0, 0, 0.9) !important; /* 深色底色（适配动画风格），透明度0.9 */
+  background: url("/images/steinsgate-bg.png") repeat rgba(0, 0, 0, 0.9) !important; /* 背景图 + 半透明底色 */
+  background-blend-mode: overlay !important; /* 背景图和底色融合，不影响文字阅读 */
+  
+  /* 文字优化：微软雅黑 + 合适字号/行高 + 浅色文字（适配深色背景） */
+  font-family: "微软雅黑", "思源宋体", sans-serif !important;
+  font-size: 16px !important;
+  line-height: 1.8 !important; /* 行高拉开，阅读不挤 */
+  color: #eee !important; /* 浅灰色文字，适配深色背景 */
+}
+
+/* 3. 代码块优化：圆角 + 滚动条 + 不撑满页面 */
+pre code {
+  padding: 15px !important;
+  border-radius: 8px !important; /* 柔和圆角 */
+  max-height: 500px !important; /* 代码太长时显示滚动条 */
+  font-size: 14px !important;
+  background-color: #1a1a1a !important; /* 深色代码块，贴合整体风格 */
+}
+
+/* 4. 二级标题：加间距 + 下划线，区分内容层级 */
+h2 {
+  margin-top: 40px !important;
+  margin-bottom: 20px !important;
+  border-bottom: 1px solid #555 !important; /* 浅灰下划线，不突兀 */
+  padding-bottom: 10px !important;
+  color: #F77F00 !important; /* 加一点动画里的橙黄色，突出标题 */
+}
+/* 折叠块样式：贴合深色主题 */
+details {
+  background-color: #1a1a1a !important; /* 深色背景，和代码块一致 */
+  border: 1px solid #555 !important; /* 浅灰边框，区分内容 */
+  border-radius: 8px !important;
+  padding: 10px 15px !important;
+  margin: 15px 0 !important;
+}
+
+/* 折叠块标题（点击展开的部分） */
+summary {
+  color: #F77F00 !important; /* 用之前的橙黄色，呼应标题 */
+  font-weight: bold !important;
+  cursor: pointer; /* 鼠标移上去显示手型 */
+}
+
+/* 折叠块内的内容样式 */
+details p, details h3, details code {
+  color: #eee !important; /* 文字颜色和正文统一 */
+}

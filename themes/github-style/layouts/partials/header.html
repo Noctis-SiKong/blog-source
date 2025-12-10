@@ -19,28 +19,18 @@
       <div
         class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
         <div class="position-relative">
-          {{ if .Site.Params.enableSearch }}
-          <form target="_blank" id="search-form" action="" accept-charset="UTF-8" method="get"
-            autocomplete="off">
+          <!-- 修复：去掉trimSuffix函数，直接使用BaseURL，解决模板解析错误 -->
+          <form target="_blank" action="https://www.google.com/search" method="get" autocomplete="off">
             <label
               class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+              <!-- 每次点击搜索框清空旧值，确保输入最新关键词 -->
               <input type="text"
                 class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
-                name="q" value="" placeholder="Search" autocomplete="off">
+                name="q" value="" placeholder="Search" autocomplete="off" onfocus="this.value=''">
+              <!-- 简化：直接使用BaseURL，无需trimSuffix -->
+              <input type="hidden" name="as_sitesearch" value="{{ .Site.BaseURL }}">
             </label>
           </form>
-          {{ else }}
-          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
-            autocomplete="off">
-            <label
-              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
-              <input type="text"
-                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
-                name="q" value="" placeholder="Search" autocomplete="off">
-              <input type="hidden" name="q" value="site:{{ .Site.BaseURL }}">
-            </label>
-          </form>
-          {{ end }}
         </div>
       </div>
     </div>

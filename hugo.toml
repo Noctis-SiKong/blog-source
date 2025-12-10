@@ -1,43 +1,51 @@
 # ===================== 基础核心配置 =====================
 baseURL = "https://noctis-sikong.github.io"
-languageCode = "zh-cn"  # 中文适配
+languageCode = "zh-cn"
 title = "一切都是命运石之门的选择！"
 theme = "github-style"
-summaryLength = 10  # ✅ 移到根级别（和 baseURL/title 同级），这是 Hugo 全局配置
+summaryLength = 10
+enableSearch = true  # 全局开启搜索
+
+# 关键：配置搜索索引的输出格式（生成search.json）
+[outputFormats.SearchJSON]
+baseName = "search"          # 输出文件名为 search.json
+mediaType = "application/json"
+isPlainText = true
+notAlternative = true
+
+# 修正home页面的输出类型（使用自定义的SearchJSON）
+[outputs]
+home = ["HTML", "RSS", "SearchJSON"]  # 替换原来的JSON为SearchJSON
 
 # ===================== 个性化参数 =====================
 [params]
-  # 1. 基础个人信息
   avatar = "/克里斯.jpg"        
   author = "天才变态少女"   
   location = "东京秋叶原"        
   userStatusEmoji = "😎"        
-
-  # 2. 社交账号
   github = "Noctis-SiKong"
   twitter = "almosy"
   email = "hui703101@163.com"        
-
-  # 3. 视觉元素
   favicon = "/R-C.png"      
   headerIcon = "/R-C.png"    
   custom_css = ["css/custom.css"]  
   custom_js = ["js/custom.js"]    
-
-  # 4. 功能开关（已开启Gitalk）
   lastmod = true                
-  enableGitalk = true  # ✅ 改为true，开启评论
-  enableSearch = false          
+  enableGitalk = true  
   rss = true                    
+  [params.search]
+    fuseJs = true  
+    maxResultLength = 10  
+    threshold = 0.6      
 
 # ===================== 最后修改时间配置 =====================
 [frontmatter]
-  lastmod = ["lastmod", ":fileModTime", ":default"]
+lastmod = ["lastmod", ":fileModTime", ":default"]
 
-# ===================== Gitalk评论配置（缩进修正+去重） =====================
+# ===================== Gitalk评论配置 =====================
 [params.gitalk]
   clientID = "ov231i3P1jRHcpsuKV"  
   clientSecret = "f2a5:f781c08b7d49bf6a43e188b7da4575cd"  
   repo = "blog-comments"  
   owner = "Noctis-SiKong"  
-  admin = ["Noctis-SiKong"]  
+  admin = ["Noctis-SiKong"]
