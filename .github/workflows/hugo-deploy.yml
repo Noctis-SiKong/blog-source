@@ -1,0 +1,49 @@
+# 1. 给这个 Actions 任务起个名字（随便起，方便你在 GitHub 看）
+name: 自动部署博客到 GitHub Pages
+
+# 2. 触发条件：当你往「源码仓库」的 main 分支推送代码时，自动执行这个任务
+on:
+  push:
+    branches: [main]  # 只监听 main 分支的推送（你的源码仓库分支）
+
+# 3. 定义要执行的「任务集」（整个部署流程）
+jobs:
+  # 给这个任务命名为 deploy（部署）
+  deploy:
+    # 4. 指定任务运行的环境：GitHub 提供的 Ubuntu 服务器（Linux 系统，适配 Hugo 构建）
+    runs-on: ubuntu-latest
+
+    # 5. 任务的具体步骤（一步一步执行）
+    steps:
+      # 步骤 1：拉取你的博客源码到 Ubuntu 服务器
+      - name: 拉取博客源码
+        uses: actions/checkout@v4  # 使用 GitHub 官方的「拉取代码」插件
+        with:
+          submodules: true  # 关键：拉取主题（因为 hugo 主题通常是 git 子模块）
+          fetch-depth: 0    # 拉取完整的 git 历史，避免构建时出错
+
+      # 步骤 2：在 Ubuntu 服务器上安装 Hugo（和你本地用的 Hugo 版本一致）
+      - name: 安装 Hugo
+        uses: peaceiris/actions-hugo@v2  # 第三方成熟的「安装 Hugo」插件
+        with:
+          hugo-version: 'latest'  # 安装最新版 Hugo（和你本地的 hugo v0.152.2 兼容）
+
+      # 步骤 3：在服务器上构建静态文件（和你本地执行 hugo 命令效果一样）
+      - name: 构建博客静态文件
+        run: hugo --minify  # 执行 hugo 构建，--minify 压缩文件（加载更快）
+
+      # 步骤 4：把构建好的 public/ 目录推送到你的 Pages 仓库
+      - name: 部署到 GitHub Pages 仓库
+        uses: peaceiris/actions-gh-pages@v4  # 第三方成熟的「部署 Pages」插件
+        with:
+          # 4.1 自动获取 GitHub 内置的令牌（无需手动配置，权限足够）
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # 4.2 要部署的目录：就是 Hugo 构建出的 public 目录
+          publish_dir: ./public
+          # 4.3 你的 Pages 仓库地址（替换成你的！已适配）
+          external_repository: Noctis-SiKong/Noctis-SiKong.github.io
+          # 4.4 Pages 仓库的部署分支（必须和你之前配置的 main 一致）
+          publish_branch: main
+          # 4.5 提交者信息（固定值，不用改）
+          user_name: "github-actions[bot]"
+          user_email: "github-actions[bot]@users.noreply.github.com"
