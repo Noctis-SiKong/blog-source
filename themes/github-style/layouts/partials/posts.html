@@ -22,9 +22,12 @@
         </div>
       </div>
       {{else}}
-        {{if gt (len .Site.Taxonomies.tags) 0}}
-          {{partial "tags.html" .}}
-        {{end}}
+        {{/* 修复核心：先判断tags是否存在，再判断长度，避免nil调用len报错 */}}
+        {{ if .Site.Taxonomies.tags }}
+          {{ if gt (len .Site.Taxonomies.tags) 0 }}
+            {{partial "tags.html" .}}
+          {{ end }}
+        {{ end }}
       {{ end }}
       <ul>
         {{ range .Paginator.Pages }}

@@ -1,11 +1,12 @@
-------
+---
 
-date = '2025-12-12T19:30:10+08:00'
-draft = false
-title = 'Crack-Segmenter核心理论学习'
-seies = '工业视觉'
+title: 'Crack-Segmenter核心理论学习'
+date: '2025-12-12T19:30:10+08:00'
+draft: false
 
-+++
+series: '工业视觉'
+
+---
 
 # 核心理论学习（聚焦原文+基础补充）：深度拆解+学术衔接
 

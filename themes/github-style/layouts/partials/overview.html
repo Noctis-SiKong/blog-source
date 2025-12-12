@@ -38,7 +38,8 @@
           {{ $section_title }}
         </h2>
         <ol class="d-flex flex-wrap list-style-none gutter-condensed mb-4 js-pinned-items-reorder-list">
-          {{ range (first 6 $section) }}
+          {{/* 核心修改1：把 first 6 改成 first 4，只显示最新4篇 */}}
+          {{ range (first 4 $section) }}
           <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
             <div
               class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
@@ -55,9 +56,9 @@
                   </a>
                 </div>
 
-
+                {{/* 核心修改2：摘要缩短为100字符 + 加省略号（可改100为80/120） */}}
                 <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  {{ .Summary | safeHTML }}
+                  {{ printf "%.100s" .Summary | safeHTML }}...
                 </div>
 
                 <p class="mb-0 f6 text-gray">
