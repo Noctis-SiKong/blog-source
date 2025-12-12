@@ -3,17 +3,20 @@
 <link rel="stylesheet" href='{{ "css/gitalk.css" | absURL }}'>
 <script src='{{ "js/gitalk.min.js" | absURL }}'></script>
 <script>
+  // 修正：参数改为小写gitalk，匹配hugo.toml配置
   const gitalk = new Gitalk({
-    clientID: '{{ .Site.Params.Gitalk.clientID }}',
-    clientSecret: '{{ .Site.Params.Gitalk.clientSecret }}',
-    repo: '{{ .Site.Params.Gitalk.repo }}',
-    owner: '{{ .Site.Params.Gitalk.owner }}',
-    admin: ['{{ .Site.Params.Gitalk.owner }}'],
-    id: eval({{ .Site.Params.Gitalk.id }}), // Ensure uniqueness and length less than 50
-    distractionFreeMode: false // Facebook-like distraction free mode
+    clientID: '{{ .Site.Params.gitalk.clientID }}',
+    clientSecret: '{{ .Site.Params.gitalk.clientSecret }}',
+    repo: '{{ .Site.Params.gitalk.repo }}',
+    owner: '{{ .Site.Params.gitalk.owner }}',
+    admin: {{ .Site.Params.gitalk.admin }}, // 直接读取admin数组，无需手动写
+    // 修正：用文章URL路径作为唯一ID（确保匹配Issues，长度<50）
+    id: window.location.pathname.substring(0, 50), 
+    distractionFreeMode: false
   });
-  (function() {
+  // 确保DOM加载完成后渲染
+  document.addEventListener('DOMContentLoaded', function() {
     gitalk.render('gitalk-container');
-  })();
+  });
 </script>
 {{ end }}
