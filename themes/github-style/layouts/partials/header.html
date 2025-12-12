@@ -33,11 +33,28 @@
           </form>
         </div>
       </div>
+      <!-- 新增：专栏导航入口（PC端显示在搜索框右侧） -->
+      <div class="Header-item d-md-flex align-items-center mb-3 mb-md-0">
+        <a class="Header-link" href="{{ .Site.BaseURL }}series/" style="color: inherit; text-decoration: none;">
+          <svg height="16" class="octicon octicon-book" viewBox="0 0 16 16" version="1.1" width="16" style="margin-right: 4px;">
+            <path fill-rule="evenodd" d="M0 1.75A.75.75 0 01.75 1h4.253c1.227 0 2.317.59 2.917 1.504l.709.923a.75.75 0 01-.257 1.08l-.79.323A2.25 2.25 0 015.25 6H2.75a.75.75 0 010-1.5h1.714a.75.75 0 00.672-.428L5.146 2.5H1.5v9h3.75a.75.75 0 010 1.5H.75a.75.75 0 01-.75-.75V1.75zm6.75 4a.75.75 0 01.75-.75h2.998a.75.75 0 01.75.75v8.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.75z"></path>
+          </svg>
+          我的专栏
+        </a>
+      </div>
     </div>
 
     <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
       <a class="Header-link " href="{{ .Site.BaseURL }}">
         <img class="octicon octicon-mark-github v-align-middle" height="32" width="32" src="{{ .Site.Params.headerIcon }}">
+      </a>
+    </div>
+    <!-- 新增：移动端专栏入口（和主题切换按钮同排） -->
+    <div class="Header-item d-md-none mr-2">
+      <a class="Header-link" href="{{ .Site.BaseURL }}series/" style="color: inherit; text-decoration: none;">
+        <svg height="16" class="octicon octicon-book" viewBox="0 0 16 16" version="1.1" width="16">
+          <path fill-rule="evenodd" d="M0 1.75A.75.75 0 01.75 1h4.253c1.227 0 2.317.59 2.917 1.504l.709.923a.75.75 0 01-.257 1.08l-.79.323A2.25 2.25 0 015.25 6H2.75a.75.75 0 010-1.5h1.714a.75.75 0 00.672-.428L5.146 2.5H1.5v9h3.75a.75.75 0 010 1.5H.75a.75.75 0 01-.75-.75V1.75zm6.75 4a.75.75 0 01.75-.75h2.998a.75.75 0 01.75.75v8.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.75z"></path>
+        </svg>
       </a>
     </div>
     <div class="Header-item" style="margin-right: 0;">

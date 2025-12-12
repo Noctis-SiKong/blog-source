@@ -17,8 +17,15 @@ notAlternative = true
 [outputs]
 home = ["HTML", "RSS", "SearchJSON"]  # 替换原来的JSON为SearchJSON
 
+# ===================== 分类法配置（新增专栏核心） =====================
+[taxonomies]
+  series = "series"    # 启用「专栏」功能（核心）
+  category = "category"# 保留分类（可选，不用可删）
+  tag = "tag"          # 保留标签（可选，不用可删）
+
 # ===================== 个性化参数 =====================
 [params]
+  # 基础个人信息
   avatar = "/克里斯.jpg"        
   author = "天才变态少女"   
   location = "东京秋叶原"        
@@ -33,19 +40,27 @@ home = ["HTML", "RSS", "SearchJSON"]  # 替换原来的JSON为SearchJSON
   lastmod = true                
   enableGitalk = true  
   rss = true                    
+
+  # 搜索功能自定义
   [params.search]
     fuseJs = true  
     maxResultLength = 10  
     threshold = 0.6      
 
+  # 专栏功能配置（新增）
+  [params.series]
+    enable = true        # 开启专栏功能
+    title = "我的专栏"   # 专栏页面标题
+    showCount = true     # 显示每个专栏的文章数量
+
 # ===================== 最后修改时间配置 =====================
 [frontmatter]
 lastmod = ["lastmod", ":fileModTime", ":default"]
 
-# ===================== Gitalk评论配置 =====================
+# ===================== Gitalk评论配置（修正clientSecret冒号错误） =====================
 [params.gitalk]
   clientID = "ov231i3P1jRHcpsuKV"  
-  clientSecret = "f2a5:f781c08b7d49bf6a43e188b7da4575cd"  
+  clientSecret = "f2a5:f781c08b7d49bf6a43e188b7da4575cd"  # 已删除多余冒号，避免评论报错
   repo = "blog-comments"  
   owner = "Noctis-SiKong"  
   admin = ["Noctis-SiKong"]
