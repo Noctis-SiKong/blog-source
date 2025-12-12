@@ -255,3 +255,30 @@ body {
   border-top: none !important; /* 取消默认分隔线 */
   padding-top: 25px !important;
 }
+/* ========== 修复视觉层级：突出主标题，弱化模块标题 ========== */
+/* 1. 文章主标题：强化颜色+调整大小，成为视觉中心 */
+.post-item .post-title,
+.post-item .post-title a {
+  font-size: 24px !important; /* 主标题放大，明确视觉优先级 */
+  color: #ffb84d !important; /* 更明亮的橙黄色，替代原蓝色 */
+  font-weight: 700 !important; /* 加粗增强突出度 */
+  margin-bottom: 15px !important;
+}
+
+/* 2. 模块标题（如“模块1：SAE”）：弱化颜色+缩小字体，降低视觉冲击 */
+.post-content h2,
+.post-content h3 {
+  font-size: 18px !important; /* 模块标题缩小，低于主标题 */
+  color: #f0a020 !important; /* 降低黄色饱和度，减少刺眼感 */
+  font-weight: 600 !important; /* 加粗程度低于主标题 */
+  margin-top: 20px !important;
+  margin-bottom: 10px !important;
+}
+
+/* 3. 正文内容：增强对比度，避免被标题掩盖 */
+.post-content p,
+.post-content li {
+  color: #f0f0f0 !important; /* 正文用浅白色，提升可读性 */
+  font-size: 16px !important;
+  line-height: 1.8 !important;
+}

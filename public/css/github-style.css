@@ -1,3 +1,4 @@
+/* 原始基础样式 */
 html {
   scroll-padding-top: 5em;
 }
@@ -188,4 +189,96 @@ body {
 
 .pinned-item-desc img {
   max-width: 100%;
+}
+
+/* ========== 新增：文章样式优化（卡片化+颜色统一+字体清晰） ========== */
+/* 1. 文章列表项卡片化（框包裹，替代分隔线） */
+.post-list .post-item {
+  border: 1px solid #444; /* 浅灰边框区分文章 */
+  border-radius: 8px; /* 圆角优化视觉 */
+  padding: 25px 30px; /* 内边距避免内容拥挤 */
+  margin-bottom: 25px; /* 文章间距 */
+  background-color: #1a1a1a; /* 卡片背景（深色主题适配） */
+  transition: all 0.3s ease; /* hover动效丝滑 */
+  box-sizing: border-box; /* 避免内边距撑大容器 */
+}
+/* 鼠标悬浮卡片效果增强 */
+.post-list .post-item:hover {
+  border-color: #f5a623; /* 边框变橙黄色（呼应主题色） */
+  box-shadow: 0 4px 12px rgba(245, 166, 35, 0.15); /* 轻微阴影提升层次 */
+  transform: translateY(-2px); /* 轻微上浮，交互更友好 */
+}
+
+/* 2. 统一颜色：文章标题/链接替换为橙黄色（取消蓝色） */
+.post-item .post-title a, 
+.post-content h1, 
+.post-content h2, 
+.post-content h3 {
+  color: #f5a623 !important; /* 橙黄色统一标题/链接色 */
+  text-decoration: none !important; /* 取消链接下划线 */
+}
+/* 链接hover效果 */
+.post-item .post-title a:hover {
+  color: #ffb84d !important; /* 悬浮时稍亮的橙黄 */
+}
+
+/* 3. 字体放大+行高优化，提升可读性 */
+/* 全局基础字体 */
+body {
+  font-size: 16px !important; /* 放大全局字体（默认14px） */
+  line-height: 1.8 !important; /* 行高优化，避免拥挤 */
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif !important; /* 适配中文 */
+}
+/* 文章正文 */
+.post-content p, 
+.post-content li, 
+.post-content td {
+  font-size: 16px !important; /* 正文字体放大 */
+  color: #e0e0e0 !important; /* 正文浅白，提升对比度 */
+  margin: 12px 0 !important; /* 段落间距 */
+}
+/* 文章标题放大+加粗 */
+.post-item .post-title {
+  font-size: 22px !important; /* 标题放大 */
+  font-weight: 600 !important; /* 加粗醒目 */
+  margin-bottom: 10px !important;
+}
+/* 文章元信息（时间/分类）弱化 */
+.post-item .post-meta {
+  font-size: 14px !important;
+  color: #999 !important; /* 浅灰，突出正文 */
+  margin-bottom: 15px !important;
+}
+
+/* 4. 取消原有的分隔线（避免和卡片重复） */
+.post-list .post-item + .post-item {
+  border-top: none !important; /* 取消默认分隔线 */
+  padding-top: 25px !important;
+}
+/* ========== 修复视觉层级：突出主标题，弱化模块标题 ========== */
+/* 1. 文章主标题：强化颜色+调整大小，成为视觉中心 */
+.post-item .post-title,
+.post-item .post-title a {
+  font-size: 24px !important; /* 主标题放大，明确视觉优先级 */
+  color: #ffb84d !important; /* 更明亮的橙黄色，替代原蓝色 */
+  font-weight: 700 !important; /* 加粗增强突出度 */
+  margin-bottom: 15px !important;
+}
+
+/* 2. 模块标题（如“模块1：SAE”）：弱化颜色+缩小字体，降低视觉冲击 */
+.post-content h2,
+.post-content h3 {
+  font-size: 18px !important; /* 模块标题缩小，低于主标题 */
+  color: #f0a020 !important; /* 降低黄色饱和度，减少刺眼感 */
+  font-weight: 600 !important; /* 加粗程度低于主标题 */
+  margin-top: 20px !important;
+  margin-bottom: 10px !important;
+}
+
+/* 3. 正文内容：增强对比度，避免被标题掩盖 */
+.post-content p,
+.post-content li {
+  color: #f0f0f0 !important; /* 正文用浅白色，提升可读性 */
+  font-size: 16px !important;
+  line-height: 1.8 !important;
 }
