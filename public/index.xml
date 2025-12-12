@@ -6,7 +6,7 @@
     <description>Recent content on 一切都是命运石之门的选择！</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 12 Dec 2025 21:25:51 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 12 Dec 2025 21:28:41 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Crack-Segmenter核心理论学习</title>
@@ -27,7 +27,7 @@
       <link>http://localhost:1313/post/%E6%9D%91%E6%9D%91%E9%80%9A%E9%97%AE%E9%A2%98/</link>
       <pubDate>Wed, 10 Dec 2025 23:07:10 +0800</pubDate>
       <guid>http://localhost:1313/post/%E6%9D%91%E6%9D%91%E9%80%9A%E9%97%AE%E9%A2%98/</guid>
-      <description>&lt;h2 id=&#34;村村通问题的本质&#34;&gt;村村通问题的本质&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;最小生成树（MST）&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;kruskal-算法思路&#34;&gt;Kruskal 算法思路&lt;/h2&gt;&#xA;&lt;p&gt;Kruskal（克鲁斯卡尔）算法是求解&lt;strong&gt;无向图最小生成树（MST）&lt;/strong&gt; 的经典贪心算法，核心逻辑是：&lt;strong&gt;按边的权重从小到大依次选边，且保证选的边不形成环，直到选够「节点数 - 1」条边（生成树的边数固定为节点数 - 1）&lt;/strong&gt;。&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;村村通问题的本质&#34;&gt;村村通问题的本质&lt;/h1&gt;&#xA;&lt;p&gt;本题要求计算使所有村落连通的最低公路建设成本，本质是求解&lt;strong&gt;最小生成树（MST）&lt;/strong&gt; 问题。最小生成树的核心是在无向图中选择 N-1 条边（N 为节点数），使得所有节点连通且总权重最小。常用的算法有 Kruskal（克鲁斯卡尔）和 Prim（普里姆），这里选择 Kruskal 算法，因为其通过排序边 + 并查集（Union-Find）的方式实现，逻辑清晰且适配本题数据规模（N≤1000，M≤3N）。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
