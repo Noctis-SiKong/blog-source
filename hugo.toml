@@ -59,7 +59,7 @@ lastmod = ["lastmod", ":fileModTime", ":default"]
 
 # ===================== Gitalk评论配置（修正clientSecret冒号错误） =====================
 [params.gitalk]
-  clientID = "ov231i3P1jRHcpsuKV"  
+  clientID = "Ov23liJPJ1rIHChpsuKV"  
   clientSecret = "d73a8d88462d1ea39e6765fe614ad2f85f586622"  # 已删除多余冒号，避免评论报错
   repo = "blog-comments"  
   owner = "Noctis-SiKong"  
