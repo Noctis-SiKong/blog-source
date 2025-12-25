@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>数据结构与算法优化 on 一切都是命运石之门的选择！</title><link>https://noctis-sikong.github.io/series/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96/</link><description>Recent content in 数据结构与算法优化 on 一切都是命运石之门的选择！</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Thu, 25 Dec 2025 19:30:25 +0800</lastBuildDate><atom:link href="https://noctis-sikong.github.io/series/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://noctis-sikong.github.io/post/%E5%9B%BE%E8%AE%BA%E6%A0%B8%E5%BF%83%E7%AE%97%E6%B3%95%E5%85%A8%E6%94%BB%E7%95%A5/</link><pubDate>Thu, 25 Dec 2025 19:30:10 +0800</pubDate><guid>https://noctis-sikong.github.io/post/%E5%9B%BE%E8%AE%BA%E6%A0%B8%E5%BF%83%E7%AE%97%E6%B3%95%E5%85%A8%E6%94%BB%E7%95%A5/</guid><description>&lt;h1 id="图论核心算法全攻略含-10-大算法--场景速选"&gt;图论核心算法全攻略（含 10 大算法 + 场景速选）&lt;/h1&gt;
+&lt;p&gt;图论是数据结构与算法优化的核心模块，也是笔试、面试、期末考试的高频考点。很多学习者的核心痛点是：面对一道图论题，既分不清 “拓扑排序 / 并查集 / DFS” 该选谁，也不知道除了基础 6 大算法外，还有哪些核心算法适配特殊场景。&lt;/p&gt;</description></item><item><title/><link>https://noctis-sikong.github.io/post/%E8%BF%9E%E9%80%9A%E6%80%A7%E9%97%AE%E9%A2%98/</link><pubDate>Thu, 25 Dec 2025 19:30:10 +0800</pubDate><guid>https://noctis-sikong.github.io/post/%E8%BF%9E%E9%80%9A%E6%80%A7%E9%97%AE%E9%A2%98/</guid><description>&lt;h2 id="连通性问题"&gt;连通性问题&lt;/h2&gt;
+&lt;p&gt;包含DFS/BFS（遍历求连通集）和并查集（Union-Find，连通性查询）&lt;/p&gt;
+&lt;h3 id="子分类-1dfsbfs遍历求连通集"&gt;子分类 1：DFS/BFS（遍历求连通集）&lt;/h3&gt;
+&lt;h4 id="核心场景详细版"&gt;核心场景（详细版）&lt;/h4&gt;
+&lt;p&gt;DFS（深度优先搜索）和 BFS（广度优先搜索）是图遍历的基础，用于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;找出无向图中的所有&lt;strong&gt;连通分量&lt;/strong&gt;（顶点间可达则属于同一分量）；&lt;/li&gt;
+&lt;li&gt;按指定顺序遍历（如 “从小编号出发，按编号递增访问邻接顶点”）；&lt;/li&gt;
+&lt;li&gt;典型应用：列出所有连通的村庄、判断图是否连通。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="算法思想详细拆解"&gt;算法思想（详细拆解）&lt;/h4&gt;
+&lt;h5 id="dfs深度优先递归实现"&gt;DFS（深度优先，递归实现）&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;核心思想&lt;/strong&gt;：“先深后广”，从起点出发，递归访问邻接顶点，直到无法深入，再回溯；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;步骤&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;步骤 1：标记当前顶点为已访问，加入连通分量；&lt;/li&gt;
+&lt;li&gt;步骤 2：按编号递增顺序遍历当前顶点的邻接顶点；&lt;/li&gt;
+&lt;li&gt;步骤 3：若邻接顶点未访问，递归访问该顶点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id="bfs广度优先队列实现"&gt;BFS（广度优先，队列实现）&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;核心思想&lt;/strong&gt;：“先广后深”，从起点出发，先访问所有邻接顶点，再访问邻接顶点的邻接顶点；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;步骤&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;步骤 1：将起点入队，标记为已访问；&lt;/li&gt;
+&lt;li&gt;步骤 2：循环出队顶点，加入连通分量；&lt;/li&gt;
+&lt;li&gt;步骤 3：按编号递增顺序遍历出队顶点的邻接顶点，未访问则入队并标记。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="通用精简代码注释清晰脱离题目限制"&gt;通用精简代码（注释清晰，脱离题目限制）&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; java.util.*;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;ConnectComponent&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// DFS：收集单个连通分量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;private&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;static&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;dfs&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; u, List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style="color:#f92672"&gt;&amp;gt;&amp;gt;&lt;/span&gt; adj, &lt;span style="color:#66d9ef"&gt;boolean&lt;/span&gt;&lt;span style="color:#f92672"&gt;[]&lt;/span&gt; visited, List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt; component) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; visited&lt;span style="color:#f92672"&gt;[&lt;/span&gt;u&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;true&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; component.&lt;span style="color:#a6e22e"&gt;add&lt;/span&gt;(u);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 按编号递增访问邻接顶点（题目要求）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; (&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; v : adj.&lt;span style="color:#a6e22e"&gt;get&lt;/span&gt;(u)) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (&lt;span style="color:#f92672"&gt;!&lt;/span&gt;visited&lt;span style="color:#f92672"&gt;[&lt;/span&gt;v&lt;span style="color:#f92672"&gt;]&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; dfs(v, adj, visited, component);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// BFS：收集单个连通分量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;private&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;static&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;bfs&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; u, List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style="color:#f92672"&gt;&amp;gt;&amp;gt;&lt;/span&gt; adj, &lt;span style="color:#66d9ef"&gt;boolean&lt;/span&gt;&lt;span style="color:#f92672"&gt;[]&lt;/span&gt; visited, List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt; component) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Queue&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt; queue &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; LinkedList&lt;span style="color:#f92672"&gt;&amp;lt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; queue.&lt;span style="color:#a6e22e"&gt;offer&lt;/span&gt;(u);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; visited&lt;span style="color:#f92672"&gt;[&lt;/span&gt;u&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;true&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;while&lt;/span&gt; (&lt;span style="color:#f92672"&gt;!&lt;/span&gt;queue.&lt;span style="color:#a6e22e"&gt;isEmpty&lt;/span&gt;()) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; cur &lt;span style="color:#f92672"&gt;=&lt;/span&gt; queue.&lt;span style="color:#a6e22e"&gt;poll&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; component.&lt;span style="color:#a6e22e"&gt;add&lt;/span&gt;(cur);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 按编号递增访问邻接顶点&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; (&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; v : adj.&lt;span style="color:#a6e22e"&gt;get&lt;/span&gt;(cur)) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (&lt;span style="color:#f92672"&gt;!&lt;/span&gt;visited&lt;span style="color:#f92672"&gt;[&lt;/span&gt;v&lt;span style="color:#f92672"&gt;]&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; visited&lt;span style="color:#f92672"&gt;[&lt;/span&gt;v&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;true&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; queue.&lt;span style="color:#a6e22e"&gt;offer&lt;/span&gt;(v);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 通用入口：返回所有连通分量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;static&lt;/span&gt; List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style="color:#f92672"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;getConnectComponents&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; n, List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style="color:#f92672"&gt;&amp;gt;&amp;gt;&lt;/span&gt; adj, &lt;span style="color:#66d9ef"&gt;boolean&lt;/span&gt; useDFS) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;boolean&lt;/span&gt;&lt;span style="color:#f92672"&gt;[]&lt;/span&gt; visited &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;boolean&lt;/span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;n&lt;span style="color:#f92672"&gt;]&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style="color:#f92672"&gt;&amp;gt;&amp;gt;&lt;/span&gt; components &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; ArrayList&lt;span style="color:#f92672"&gt;&amp;lt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; (&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; i &lt;span style="color:#f92672"&gt;=&lt;/span&gt; 0; i &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt; n; i&lt;span style="color:#f92672"&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (&lt;span style="color:#f92672"&gt;!&lt;/span&gt;visited&lt;span style="color:#f92672"&gt;[&lt;/span&gt;i&lt;span style="color:#f92672"&gt;]&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style="color:#f92672"&gt;&amp;gt;&amp;gt;&lt;/span&gt; components &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; ArrayList&lt;span style="color:#f92672"&gt;&amp;lt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; (&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; i &lt;span style="color:#f92672"&gt;=&lt;/span&gt; 0; i &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt; n; i&lt;span style="color:#f92672"&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (&lt;span style="color:#f92672"&gt;!&lt;/span&gt;visited&lt;span style="color:#f92672"&gt;[&lt;/span&gt;i&lt;span style="color:#f92672"&gt;]&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt; component &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; ArrayList&lt;span style="color:#f92672"&gt;&amp;lt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (useDFS) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; dfs(i, adj, visited, component);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; } &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; bfs(i, adj, visited, component);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; components.&lt;span style="color:#a6e22e"&gt;add&lt;/span&gt;(component);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; components;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 复用入口（适配&amp;#34;列出连通集&amp;#34;）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;static&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;main&lt;/span&gt;(String&lt;span style="color:#f92672"&gt;[]&lt;/span&gt; args) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Scanner sc &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; Scanner(System.&lt;span style="color:#a6e22e"&gt;in&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;while&lt;/span&gt; (sc.&lt;span style="color:#a6e22e"&gt;hasNext&lt;/span&gt;()) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; n &lt;span style="color:#f92672"&gt;=&lt;/span&gt; sc.&lt;span style="color:#a6e22e"&gt;nextInt&lt;/span&gt;(); &lt;span style="color:#75715e"&gt;// 顶点数（0~n-1）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; e &lt;span style="color:#f92672"&gt;=&lt;/span&gt; sc.&lt;span style="color:#a6e22e"&gt;nextInt&lt;/span&gt;(); &lt;span style="color:#75715e"&gt;// 边数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 初始化邻接表，邻接顶点按编号排序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style="color:#f92672"&gt;&amp;gt;&amp;gt;&lt;/span&gt; adj &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; ArrayList&lt;span style="color:#f92672"&gt;&amp;lt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; (&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; i &lt;span style="color:#f92672"&gt;=&lt;/span&gt; 0; i &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt; n; i&lt;span style="color:#f92672"&gt;++&lt;/span&gt;) adj.&lt;span style="color:#a6e22e"&gt;add&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; ArrayList&lt;span style="color:#f92672"&gt;&amp;lt;&amp;gt;&lt;/span&gt;());
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; (&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; i &lt;span style="color:#f92672"&gt;=&lt;/span&gt; 0; i &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt; e; i&lt;span style="color:#f92672"&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; u &lt;span style="color:#f92672"&gt;=&lt;/span&gt; sc.&lt;span style="color:#a6e22e"&gt;nextInt&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; v &lt;span style="color:#f92672"&gt;=&lt;/span&gt; sc.&lt;span style="color:#a6e22e"&gt;nextInt&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; adj.&lt;span style="color:#a6e22e"&gt;get&lt;/span&gt;(u).&lt;span style="color:#a6e22e"&gt;add&lt;/span&gt;(v);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; adj.&lt;span style="color:#a6e22e"&gt;get&lt;/span&gt;(v).&lt;span style="color:#a6e22e"&gt;add&lt;/span&gt;(u); &lt;span style="color:#75715e"&gt;// 无向图双向加边&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 按编号递增排序邻接顶点（满足题目遍历顺序要求）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; (&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; i &lt;span style="color:#f92672"&gt;=&lt;/span&gt; 0; i &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt; n; i&lt;span style="color:#f92672"&gt;++&lt;/span&gt;) Collections.&lt;span style="color:#a6e22e"&gt;sort&lt;/span&gt;(adj.&lt;span style="color:#a6e22e"&gt;get&lt;/span&gt;(i));
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 1. 输出DFS结果&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style="color:#f92672"&gt;&amp;gt;&amp;gt;&lt;/span&gt; dfsRes &lt;span style="color:#f92672"&gt;=&lt;/span&gt; getConnectComponents(n, adj, &lt;span style="color:#66d9ef"&gt;true&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; (List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt; comp : dfsRes) printComponent(comp);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 2. 输出BFS结果&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style="color:#f92672"&gt;&amp;gt;&amp;gt;&lt;/span&gt; bfsRes &lt;span style="color:#f92672"&gt;=&lt;/span&gt; getConnectComponents(n, adj, &lt;span style="color:#66d9ef"&gt;false&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; (List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt; comp : bfsRes) printComponent(comp);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sc.&lt;span style="color:#a6e22e"&gt;close&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 格式化输出连通分量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;private&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;static&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;printComponent&lt;/span&gt;(List&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt; component) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; System.&lt;span style="color:#a6e22e"&gt;out&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;print&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;{ &amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; (&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; i &lt;span style="color:#f92672"&gt;=&lt;/span&gt; 0; i &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt; component.&lt;span style="color:#a6e22e"&gt;size&lt;/span&gt;(); i&lt;span style="color:#f92672"&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (i &lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt; 0) System.&lt;span style="color:#a6e22e"&gt;out&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;print&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34; &amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; System.&lt;span style="color:#a6e22e"&gt;out&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;print&lt;/span&gt;(component.&lt;span style="color:#a6e22e"&gt;get&lt;/span&gt;(i));
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; System.&lt;span style="color:#a6e22e"&gt;out&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;println&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34; }&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="核心考点详细解释"&gt;核心考点（详细解释）&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;遍历顺序要求&lt;/strong&gt;：题目常要求 “从小编号出发，按编号递增访问邻接顶点”，需对邻接表排序（Collections.sort (adj.get (u))）；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;访问标记时机&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;DFS：递归前标记（避免重复递归）；&lt;/li&gt;
+&lt;li&gt;BFS：入队时标记（避免重复入队）；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;连通分量统计&lt;/strong&gt;：遍历所有顶点，未访问则启动一次 DFS/BFS，统计启动次数即为连通分量数；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;无向图处理&lt;/strong&gt;：邻接表必须双向加边，否则会漏连通关系。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="易错点详细说明错误原因--正确做法"&gt;易错点（详细说明错误原因 + 正确做法）&lt;/h4&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;易错点&lt;/th&gt;
+ &lt;th&gt;错误原因&lt;/th&gt;
+ &lt;th&gt;正确做法&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;邻接表未排序&lt;/td&gt;
+ &lt;td&gt;访问顺序不符合题目要求&lt;/td&gt;
+ &lt;td&gt;对每个 adj.get (u) 执行 Collections.sort ()&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;BFS 出队时才标记&lt;/td&gt;
+ &lt;td&gt;重复入队，导致死循环 / 结果错误&lt;/td&gt;
+ &lt;td&gt;入队时立即标记 visited [v] = true&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;无向图未双向加边&lt;/td&gt;
+ &lt;td&gt;漏连通关系，连通分量统计错误&lt;/td&gt;
+ &lt;td&gt;同时添加 u→v 和 v→u 的边&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;多组数据未重置 visited&lt;/td&gt;
+ &lt;td&gt;前一组数据的标记影响后一组&lt;/td&gt;
+ &lt;td&gt;每组数据重新初始化 visited 数组&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="子分类-2并查集union-find连通性查询"&gt;子分类 2：并查集（Union-Find，连通性查询）&lt;/h3&gt;
+&lt;h4 id="核心场景详细版-1"&gt;核心场景（详细版）&lt;/h4&gt;
+&lt;p&gt;并查集是高效的&lt;strong&gt;连通性查询&lt;/strong&gt;数据结构，适合以下场景：&lt;/p&gt;</description></item><item><title>AVL树</title><link>https://noctis-sikong.github.io/post/avl-%E6%A0%91/</link><pubDate>Thu, 25 Dec 2025 19:30:10 +0800</pubDate><guid>https://noctis-sikong.github.io/post/avl-%E6%A0%91/</guid><description>&lt;h1 id="java-实现-avl-树"&gt;Java 实现 AVL 树&lt;/h1&gt;
+&lt;h2 id="一引言为什么需要-avl-树"&gt;一、引言：为什么需要 AVL 树？&lt;/h2&gt;
+&lt;p&gt;在数据结构的学习中，二叉搜索树（BST）是基础，但普通 BST 存在一个致命问题：如果插入的元素是有序的（比如 1,2,3,4,5），会退化成&lt;strong&gt;链表&lt;/strong&gt;，查询、插入的时间复杂度从&lt;em&gt;O&lt;/em&gt;(log&lt;em&gt;n&lt;/em&gt;)骤降为&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;)。&lt;/p&gt;</description></item><item><title>二叉树构建与遍历</title><link>https://noctis-sikong.github.io/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9E%84%E5%BB%BA%E4%B8%8E%E9%81%8D%E5%8E%86/</link><pubDate>Thu, 25 Dec 2025 19:30:10 +0800</pubDate><guid>https://noctis-sikong.github.io/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9E%84%E5%BB%BA%E4%B8%8E%E9%81%8D%E5%8E%86/</guid><description>&lt;h1 id="二叉树构建与遍历题型全解"&gt;二叉树构建与遍历题型全解&lt;/h1&gt;
+&lt;h2 id="一核心算法思想总览"&gt;一、核心算法思想总览&lt;/h2&gt;
+&lt;p&gt;这 4 道题本质是&lt;strong&gt;分治思想&lt;/strong&gt;在二叉树中的应用，核心逻辑高度统一 —— 无论给定哪两种遍历序列，都以「中序序列为分割依据，另一种序列定根节点」，通过 “拆分问题→递归求解子问题→合并结果” 构建二叉树，再按需执行遍历或反转操作。&lt;/p&gt;
+&lt;h3 id="通用分治框架贯穿所有题型"&gt;通用分治框架（贯穿所有题型）&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;找根节点：从非中序序列（前序 / 后序 / 层序）中定位当前子树的根（不同序列根节点位置不同）；&lt;/li&gt;
+&lt;li&gt;分割子树：在中序序列中找到根节点位置，将中序序列拆分为「左子树中序序列」和「右子树中序序列」，确定左右子树节点数；&lt;/li&gt;
+&lt;li&gt;递归构建：根据左右子树节点数，拆分非中序序列，递归构建左、右子树；&lt;/li&gt;
+&lt;li&gt;合并结果：当前根节点连接左右子树，形成完整二叉树。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="辅助算法思想"&gt;辅助算法思想&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;遍历思想：前 / 中 / 后序用&lt;strong&gt;深度优先搜索（DFS，递归实现）&lt;/strong&gt;，层序用&lt;strong&gt;广度优先搜索（BFS，队列实现）&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;镜面反转：本质是后序 DFS—— 先递归反转子树，再交换当前节点左右子树（或先交换再递归，结果一致）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="二通用基础模块算法思想落地--优化代码"&gt;二、通用基础模块（算法思想落地 + 优化代码）&lt;/h2&gt;
+&lt;h3 id="1-二叉树节点定义极简核心版"&gt;1. 二叉树节点定义（极简核心版）&lt;/h3&gt;
+&lt;p&gt;算法思想：节点是二叉树的基本单位，仅需存储值、左子节点、右子节点，无需冗余属性（如 AVL 树的 height），聚焦构建与遍历核心。&lt;/p&gt;</description></item><item><title>前 m 大数值筛选</title><link>https://noctis-sikong.github.io/post/%E5%89%8D-m-%E5%A4%A7%E6%95%B0%E5%80%BC%E7%AD%9B%E9%80%89/</link><pubDate>Thu, 25 Dec 2025 19:30:10 +0800</pubDate><guid>https://noctis-sikong.github.io/post/%E5%89%8D-m-%E5%A4%A7%E6%95%B0%E5%80%BC%E7%AD%9B%E9%80%89/</guid><description>&lt;h1 id="前-m-大数值筛选二分答案--局部排序"&gt;前 m 大数值筛选（二分答案 + 局部排序）&lt;/h1&gt;
+&lt;h2 id="一题目核心分析与算法思想"&gt;一、题目核心分析与算法思想&lt;/h2&gt;
+&lt;h3 id="1-题目特点"&gt;1. 题目特点&lt;/h3&gt;
+&lt;p&gt;给定 n 个整数（0 &amp;lt;n,m &amp;lt; 1e6），数值范围 [-500000,500000]，要求输出前 m 大的数（降序）。&lt;/p&gt;</description></item><item><title>拓扑排序（Topological Sort）</title><link>https://noctis-sikong.github.io/post/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8Ftopological-sort/</link><pubDate>Thu, 25 Dec 2025 19:30:10 +0800</pubDate><guid>https://noctis-sikong.github.io/post/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8Ftopological-sort/</guid><description>&lt;h2 id="拓扑排序topological-sort"&gt;拓扑排序（Topological Sort）&lt;/h2&gt;
+&lt;h3 id="核心场景详细版"&gt;核心场景（详细版）&lt;/h3&gt;
+&lt;p&gt;拓扑排序仅适用于&lt;strong&gt;有向无环图（DAG）&lt;/strong&gt;，核心目标是对顶点进行线性排序，满足「若存在从顶点 i 到顶点 j 的有向路径，则 i 在排序结果中一定出现在 j 之前」。&lt;/p&gt;</description></item><item><title>数组中「左侧最大 + 右侧最小」元素筛选</title><link>https://noctis-sikong.github.io/post/%E5%B7%A6%E4%BE%A7%E6%9C%80%E5%A4%A7-+-%E5%8F%B3%E4%BE%A7%E6%9C%80%E5%B0%8F%E5%85%83%E7%B4%A0%E7%AD%9B%E9%80%89/</link><pubDate>Thu, 25 Dec 2025 19:30:10 +0800</pubDate><guid>https://noctis-sikong.github.io/post/%E5%B7%A6%E4%BE%A7%E6%9C%80%E5%A4%A7-+-%E5%8F%B3%E4%BE%A7%E6%9C%80%E5%B0%8F%E5%85%83%E7%B4%A0%E7%AD%9B%E9%80%89/</guid><description>&lt;h1 id="左侧最大--右侧最小元素筛选"&gt;「左侧最大 + 右侧最小」元素筛选&lt;/h1&gt;
+&lt;h2 id="一题目核心分析与算法思想"&gt;一、题目核心分析与算法思想&lt;/h2&gt;
+&lt;h3 id="1-题目功能定义默认输入为正数"&gt;1. 题目功能定义（默认输入为正数）&lt;/h3&gt;
+&lt;p&gt;给定长度为 n 的&lt;strong&gt;正整数数组&lt;/strong&gt;，筛选出满足以下条件的元素（「递增关键元素」）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;第一个元素：大于左侧所有元素的最大值（左侧无元素，最大值为 0）且小于右侧所有元素的最小值；&lt;/p&gt;</description></item><item><title>最小生成树（MST）</title><link>https://noctis-sikong.github.io/post/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91mst--prim-%E7%AE%97%E6%B3%95/</link><pubDate>Thu, 25 Dec 2025 19:30:10 +0800</pubDate><guid>https://noctis-sikong.github.io/post/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91mst--prim-%E7%AE%97%E6%B3%95/</guid><description>&lt;h2 id="最小生成树mst--prim-算法"&gt;最小生成树（MST）- Prim 算法&lt;/h2&gt;
+&lt;h3 id="核心场景详细版"&gt;核心场景（详细版）&lt;/h3&gt;
+&lt;p&gt;最小生成树（MST）适用于&lt;strong&gt;无向连通图&lt;/strong&gt;，核心目标是：找到一组边，满足「连接所有顶点」且「边权和最小」，同时无环。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;典型应用：村村通公路（最低成本连接所有村庄）、网络布线（最低成本连接所有节点）；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;额外需求：若图不连通，无法生成 MST，需输出 - 1（表示需新增边）。&lt;/p&gt;</description></item><item><title>最短路径</title><link>https://noctis-sikong.github.io/post/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/</link><pubDate>Thu, 25 Dec 2025 19:30:10 +0800</pubDate><guid>https://noctis-sikong.github.io/post/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/</guid><description>&lt;h2 id="最短路径算法"&gt;最短路径算法&lt;/h2&gt;
+&lt;p&gt;包含Floyd-Warshall（多源最短路径）Dijkstra（单源最短路径）两种算法&lt;/p&gt;
+&lt;h3 id="子分类-1floyd-warshall弗洛伊德多源最短路径"&gt;子分类 1：Floyd-Warshall（弗洛伊德，多源最短路径）&lt;/h3&gt;
+&lt;h4 id="核心场景详细版"&gt;核心场景（详细版）&lt;/h4&gt;
+&lt;p&gt;Floyd 算法是&lt;strong&gt;多源最短路径&lt;/strong&gt;的经典实现，可一次性求出「任意两个顶点之间」的最短路径，适合以下场景：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;顶点数少（n≤100）：时间复杂度 O (n³)，n&amp;gt;100 时会超时；&lt;/li&gt;
+&lt;li&gt;无负权环（允许负权边）：若存在负权环，最短路径无意义；&lt;/li&gt;
+&lt;li&gt;需批量查询：如同时求起点 0 到所有点、点 P 到点 Q 的最短路径（如 “最短路径”“畅通工程 3” 变种）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="算法思想详细拆解"&gt;算法思想（详细拆解）&lt;/h4&gt;
+&lt;p&gt;Floyd 算法基于「动态规划」思想，核心是 “松弛操作”，步骤拆解如下：&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,241 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width"><script type=application/javascript src=https://noctis-sikong.github.io/js/theme-mode.js></script><link rel=stylesheet href=https://noctis-sikong.github.io/css/frameworks.min.css><link rel=stylesheet href=https://noctis-sikong.github.io/css/github.min.css><link rel=stylesheet href=https://noctis-sikong.github.io/css/github-style.css><link rel=stylesheet href=https://noctis-sikong.github.io/css/light.css><link rel=stylesheet href=https://noctis-sikong.github.io/css/dark.css><link rel=stylesheet href=https://noctis-sikong.github.io/css/syntax.css><title>AVL树 - 一切都是命运石之门的选择！</title><link rel=icon type=image/x-icon href=/R-C.png><meta name=theme-color content="#1e2327"><link rel=stylesheet href=https://noctis-sikong.github.io/css/custom.css><script type=text/javascript src=https://noctis-sikong.github.io/js/custom.js></script><meta name=description content="Java 实现 AVL 树 一、引言：为什么需要 AVL 树？ 在数据结构的学习中，二叉搜索树（BST）是基础，但普通 BST 存在一个致命问题：如果插入的元素是有序的（比如 1,2,3,4,5），会退化成链表，查询、插入的时间复杂度从O(logn)骤降为O(n)。
+"><meta name=keywords content><meta name=robots content="noodp"><link rel=canonical href=https://noctis-sikong.github.io/post/avl-%E6%A0%91/><meta name=twitter:card content="summary"><meta name=twitter:title content="AVL树 - 一切都是命运石之门的选择！"><meta name=twitter:description content="Java 实现 AVL 树 一、引言：为什么需要 AVL 树？ 在数据结构的学习中，二叉搜索树（BST）是基础，但普通 BST 存在一个致命问题：如果插入的元素是有序的（比如 1,2,3,4,5），会退化成链表，查询、插入的时间复杂度从O(logn)骤降为O(n)。
+"><meta name=twitter:site content="https://noctis-sikong.github.io/"><meta name=twitter:creator content><meta name=twitter:image content="https://noctis-sikong.github.io/"><meta property="og:type" content="article"><meta property="og:title" content="AVL树 - 一切都是命运石之门的选择！"><meta property="og:description" content="Java 实现 AVL 树 一、引言：为什么需要 AVL 树？ 在数据结构的学习中，二叉搜索树（BST）是基础，但普通 BST 存在一个致命问题：如果插入的元素是有序的（比如 1,2,3,4,5），会退化成链表，查询、插入的时间复杂度从O(logn)骤降为O(n)。
+"><meta property="og:url" content="https://noctis-sikong.github.io/post/avl-%E6%A0%91/"><meta property="og:site_name" content="AVL树"><meta property="og:image" content="https://noctis-sikong.github.io/"><meta property="og:image:width" content="2048"><meta property="og:image:height" content="1024"><meta property="article:published_time" content="2025-12-25 19:30:10 +0800 CST"></head><body><div style=position:relative><header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on"><div class="Header-item mobile-none" style=margin-top:-4px;margin-bottom:-4px><a class=Header-link href=https://noctis-sikong.github.io/><img class=octicon height=32 width=32 src=/R-C.png></a></div><div class="Header-item d-md-none"><button class="Header-link btn-link js-details-target" type=button onclick='document.querySelector("#header-search").style.display=document.querySelector("#header-search").style.display=="none"?"block":"none"'>
+<svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M1 2.75A.75.75.0 011.75 2h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 2.75zm0 5A.75.75.0 011.75 7h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 7.75zM1.75 12a.75.75.0 100 1.5h12.5a.75.75.0 100-1.5H1.75z"/></svg></button></div><div style=display:none id=header-search class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex"><div class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to"><div class=position-relative><form target=_blank action=https://www.google.com/search method=get autocomplete=off><label class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center"><input type=text class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable" name=q placeholder=Search autocomplete=off onfocus='this.value=""'>
+<input type=hidden name=as_sitesearch value=https://noctis-sikong.github.io/></label></form></div></div><div class="Header-item d-md-flex align-items-center mb-3 mb-md-0"><a class=Header-link href=https://noctis-sikong.github.io/series/ style=color:inherit;text-decoration:none><svg height="16" class="octicon octicon-book" viewBox="0 0 16 16" width="16" style="margin-right:4px"><path fill-rule="evenodd" d="M0 1.75A.75.75.0 01.75 1h4.253C6.23 1 7.32 1.59 7.92 2.504l.709.923a.75.75.0 01-.257 1.08l-.79.323A2.25 2.25.0 015.25 6H2.75a.75.75.0 010-1.5h1.714a.75.75.0 00.672-.428L5.146 2.5H1.5v9h3.75a.75.75.0 010 1.5H.75A.75.75.0 010 12.25V1.75zm6.75 4A.75.75.0 017.5 5h2.998a.75.75.0 01.75.75v8.5a.75.75.0 01-.75.75H7.5a.75.75.0 01-.75-.75V5.75z"/></svg>
+我的专栏</a></div></div><div class="Header-item Header-item--full flex-justify-center d-md-none position-relative"><a class=Header-link href=https://noctis-sikong.github.io/><img class="octicon octicon-mark-github v-align-middle" height=32 width=32 src=/R-C.png></a></div><div class="Header-item d-md-none mr-2"><a class=Header-link href=https://noctis-sikong.github.io/series/ style=color:inherit;text-decoration:none><svg height="16" class="octicon octicon-book" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M0 1.75A.75.75.0 01.75 1h4.253C6.23 1 7.32 1.59 7.92 2.504l.709.923a.75.75.0 01-.257 1.08l-.79.323A2.25 2.25.0 015.25 6H2.75a.75.75.0 010-1.5h1.714a.75.75.0 00.672-.428L5.146 2.5H1.5v9h3.75a.75.75.0 010 1.5H.75A.75.75.0 010 12.25V1.75zm6.75 4A.75.75.0 017.5 5h2.998a.75.75.0 01.75.75v8.5a.75.75.0 01-.75.75H7.5a.75.75.0 01-.75-.75V5.75z"/></svg></a></div><div class=Header-item style=margin-right:0><a href=javascript:void(0) class="Header-link no-select" onclick=switchTheme()><svg style="fill:var(--color-profile-color-modes-toggle-moon)" class="no-select" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.52208 7.71754c3.05612.0 5.53362-2.47748 5.53362-5.5336C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961 9.95801 1.07727 10.3495.771159 10.6474.99992c1.4679 1.12724 2.4141 2.90007 2.4141 4.89391.0 3.40575-2.7609 6.16667-6.16665 6.16667-2.94151.0-5.40199-2.0595-6.018122-4.81523C.794841 6.87902 1.23668 6.65289 1.55321 6.85451 2.41106 7.40095 3.4296 7.71754 4.52208 7.71754z"/></svg></a></div></header></div><div id=search-result class="container-lg px-3 new-discussion-timeline" style=display:none></div><div class=application-main><div><main><div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4"><div class=px-0><div class="mb-3 d-flex px-3 px-md-3 px-lg-5"><div class="flex-auto min-width-0 width-fit mr-3"><div class=d-flex><div class="d-none d-md-block"><a class="avatar mr-2 flex-shrink-0" href=https://noctis-sikong.github.io/><img class=avatar-user src=/%e5%85%8b%e9%87%8c%e6%96%af.jpg width=32 height=32></a></div><div class="d-flex flex-column"><h1 class="break-word f3 text-normal mb-md-0 mb-1"><span class=author><a href=https://noctis-sikong.github.io/>天才变态少女</a>
+</span><span class=path-divider>/</span>
+<strong class="css-truncate css-truncate-target mr-1" style=max-width:410px><a href=https://noctis-sikong.github.io/post/avl-%E6%A0%91/>AVL树</a></strong></h1><div class="note m-0">Created <relative-time datetime="Thu, 25 Dec 2025 19:30:10 +0800" class=no-wrap>Thu, 25 Dec 2025 19:30:10 +0800</relative-time>
+<span class=file-info-divider></span>
+Modified <relative-time datetime="Thu, 25 Dec 2025 18:18:05 +0800" class=no-wrap>Thu, 25 Dec 2025 18:18:05 +0800</relative-time></div></div></div></div></div></div></div><div class="container-lg px-3 new-discussion-timeline"><div class="repository-content gist-content"><div><div class="js-gist-file-update-container js-task-list-container file-box"><div id=file-pytest class="file my-2"><div id=post-header class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style=z-index:2><div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto"><div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0"><summary id=toc-toggle onclick=clickToc() class="btn btn-octicon m-0 mr-2 p-2"><svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered"><path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75.0 000 1.5h8.5a.75.75.0 000-1.5h-8.5zm0 5a.75.75.0 000 1.5h8.5a.75.75.0 000-1.5h-8.5zm0 5a.75.75.0 000 1.5h8.5a.75.75.0 000-1.5h-8.5zM3 8A1 1 0 111 8a1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"/></svg></summary><details-menu class=SelectMenu id=toc-details style="display: none;"><div class="SelectMenu-modal rounded-3 mt-1" style=max-height:340px><div class="SelectMenu-list SelectMenu-list--borderless p-2" style=overscroll-behavior:contain id=toc-list></div></div></details-menu>3618 Words</div><div class="file-actions flex-order-2 pt-0"></div></div></div><div class="Box-body px-5 pb-5" style=z-index:1><article class="markdown-body entry-content container-lg"><h1 id=java-实现-avl-树>Java 实现 AVL 树</h1><h2 id=一引言为什么需要-avl-树>一、引言：为什么需要 AVL 树？</h2><p>在数据结构的学习中，二叉搜索树（BST）是基础，但普通 BST 存在一个致命问题：如果插入的元素是有序的（比如 1,2,3,4,5），会退化成<strong>链表</strong>，查询、插入的时间复杂度从<em>O</em>(log<em>n</em>)骤降为<em>O</em>(<em>n</em>)。</p><p>AVL 树（以发明者 Adelson-Velsky 和 Landis 命名）是<strong>自平衡二叉搜索树</strong>，核心特性是：<strong>任意节点的左右子树高度差（平衡因子）的绝对值不超过 1</strong>。当插入 / 删除元素导致平衡因子超出范围时，会通过<strong>旋转</strong>操作重新平衡，保证树的高度始终是<em>O</em>(log<em>n</em>)，从而维持高效的增删查改性能。</p><p>本文将通过完整的 Java 代码，拆解 AVL 树的核心实现（插入、平衡调整、叶子节点统计、三种遍历），既是博客分享，也适配期末复习的考点梳理。</p><h2 id=二代码整体架构>二、代码整体架构</h2><p>整个代码分为两部分：</p><ol><li><code>Main</code>主类：负责读取输入、创建 AVL 树实例、调用核心方法（插入、统计叶子、遍历）；</li><li><code>BinarySearchTree</code>类：封装 AVL 树的核心逻辑（节点定义、插入、平衡调整、叶子统计、遍历）。</li></ol><p>先看整体代码结构（带复习重点标注）：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> java.util.Scanner;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Main</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>        Scanner sc <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Scanner(System.<span style=color:#a6e22e>in</span>);
+</span></span><span style=display:flex><span>        BinarySearchTree avlTree <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> BinarySearchTree(); <span style=color:#75715e>// 初始化AVL树</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 循环读取输入整数，插入AVL树</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span> (sc.<span style=color:#a6e22e>hasNextInt</span>()) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> v <span style=color:#f92672>=</span> sc.<span style=color:#a6e22e>nextInt</span>();
+</span></span><span style=display:flex><span>            avlTree.<span style=color:#a6e22e>insert</span>(v);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        sc.<span style=color:#a6e22e>close</span>();
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 1. 输出叶子节点数量</span>
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(avlTree.<span style=color:#a6e22e>leave</span>());
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 2. 前序遍历输出</span>
+</span></span><span style=display:flex><span>        avlTree.<span style=color:#a6e22e>infront</span>();
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 3. 后序遍历输出</span>
+</span></span><span style=display:flex><span>        avlTree.<span style=color:#a6e22e>after</span>();
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 4. 中序遍历输出</span>
+</span></span><span style=display:flex><span>        avlTree.<span style=color:#a6e22e>mid</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// AVL树核心类（复习核心）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>BinarySearchTree</span> {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 1. 节点内部类（考点：AVL节点需维护高度）</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TreeNode</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> v;          <span style=color:#75715e>// 节点值</span>
+</span></span><span style=display:flex><span>        TreeNode left;  <span style=color:#75715e>// 左子节点</span>
+</span></span><span style=display:flex><span>        TreeNode right; <span style=color:#75715e>// 右子节点</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> height;     <span style=color:#75715e>// 节点高度（AVL核心属性，普通BST无此属性）</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        TreeNode(<span style=color:#66d9ef>int</span> i) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>v</span> <span style=color:#f92672>=</span> i;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>left</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>right</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>height</span> <span style=color:#f92672>=</span> 1; <span style=color:#75715e>// 新节点高度初始为1</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> TreeNode root; <span style=color:#75715e>// AVL树根节点</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>BinarySearchTree</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>root</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>; <span style=color:#75715e>// 初始空树</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 2. 对外暴露的插入方法</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>insert</span>(<span style=color:#66d9ef>int</span> v) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>root</span> <span style=color:#f92672>=</span> insertBST(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>root</span>, v);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 3. 插入核心方法（含平衡调整，期末核心考点）</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> TreeNode <span style=color:#a6e22e>insertBST</span>(TreeNode root, <span style=color:#66d9ef>int</span> v) { <span style=color:#75715e>/* 详见下文 */</span> }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 4. 辅助方法：获取节点高度</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getHeigh</span>(TreeNode node) { <span style=color:#75715e>/* 详见下文 */</span> }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 5. 辅助方法：计算平衡因子（期末核心考点）</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getBalance</span>(TreeNode node) { <span style=color:#75715e>/* 详见下文 */</span> }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 6. 旋转操作（左旋转、右旋转，期末核心考点）</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> TreeNode <span style=color:#a6e22e>leftRotate</span>(TreeNode x) { <span style=color:#75715e>/* 详见下文 */</span> }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> TreeNode <span style=color:#a6e22e>rightRotate</span>(TreeNode y) { <span style=color:#75715e>/* 详见下文 */</span> }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 7. 统计叶子节点数量（递归，期末常考）</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>leave</span>() { <span style=color:#75715e>/* 详见下文 */</span> }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>findleave</span>(TreeNode root) { <span style=color:#75715e>/* 详见下文 */</span> }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 8. 三种遍历（前序、中序、后序，期末必考）</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>boolean</span> isFirst <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>; <span style=color:#75715e>// 控制遍历输出格式（无前置空格）</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>mid</span>() { <span style=color:#75715e>/* 中序遍历 */</span> }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>midprint</span>(TreeNode root) { <span style=color:#75715e>/* 中序递归逻辑 */</span> }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>infront</span>() { <span style=color:#75715e>/* 前序遍历 */</span> }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>frontprint</span>(TreeNode root) { <span style=color:#75715e>/* 前序递归逻辑 */</span> }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>after</span>() { <span style=color:#75715e>/* 后序遍历 */</span> }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>afterprint</span>(TreeNode root) { <span style=color:#75715e>/* 后序递归逻辑 */</span> }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=三核心模块逐行解析复习重点>三、核心模块逐行解析（复习重点）</h2><h3 id=模块-1treenode-节点定义avl-树的基础>模块 1：TreeNode 节点定义（AVL 树的基础）</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TreeNode</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> v;          <span style=color:#75715e>// 节点值</span>
+</span></span><span style=display:flex><span>    TreeNode left;  <span style=color:#75715e>// 左子节点</span>
+</span></span><span style=display:flex><span>    TreeNode right; <span style=color:#75715e>// 右子节点</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> height;     <span style=color:#75715e>// 节点高度（★复习重点★）</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    TreeNode(<span style=color:#66d9ef>int</span> i) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>v</span> <span style=color:#f92672>=</span> i;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>left</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>right</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>height</span> <span style=color:#f92672>=</span> 1; <span style=color:#75715e>// 新节点高度初始为1（叶子节点高度为1）</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ul><li>区别于普通 BST：AVL 树的节点必须维护<code>height</code>属性，用于计算平衡因子；</li><li>高度定义：叶子节点高度为 1，空节点高度为 0（后续<code>getHeigh</code>方法会处理）；</li><li>期末考点：AVL 树节点的核心属性、高度的初始化规则。</li></ul><h3 id=模块-2插入方法avl-树的核心含平衡调整>模块 2：插入方法（AVL 树的核心，含平衡调整）</h3><p>插入逻辑分为两步：① 普通 BST 的插入；② 调整高度 + 检查平衡 + 旋转平衡。</p><h4 id=步骤-1普通-bst-插入>步骤 1：普通 BST 插入</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> TreeNode <span style=color:#a6e22e>insertBST</span>(TreeNode root, <span style=color:#66d9ef>int</span> v) {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 1. 普通BST插入逻辑（递归终止条件：空节点则创建新节点）</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (root <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> TreeNode(v);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 小于根节点：插入左子树</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (v <span style=color:#f92672>&lt;</span> root.<span style=color:#a6e22e>v</span>) {
+</span></span><span style=display:flex><span>        root.<span style=color:#a6e22e>left</span> <span style=color:#f92672>=</span> insertBST(root.<span style=color:#a6e22e>left</span>, v);
+</span></span><span style=display:flex><span>    } 
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 大于根节点：插入右子树</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (v <span style=color:#f92672>&gt;</span> root.<span style=color:#a6e22e>v</span>) {
+</span></span><span style=display:flex><span>        root.<span style=color:#a6e22e>right</span> <span style=color:#f92672>=</span> insertBST(root.<span style=color:#a6e22e>right</span>, v);
+</span></span><span style=display:flex><span>    } 
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 等于根节点：AVL树不存重复值，直接返回</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> root;
+</span></span><span style=display:flex><span>    }
+</span></span></code></pre></div><ul><li>递归插入：符合 BST 的核心规则（左子树 &lt; 根 &lt; 右子树）；</li><li>去重：重复值直接返回，不插入（AVL 树通常不存储重复元素）。</li></ul><h4 id=步骤-2更新当前节点高度>步骤 2：更新当前节点高度</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#75715e>// 2. 更新当前节点的高度（★复习重点★）</span>
+</span></span><span style=display:flex><span>    root.<span style=color:#a6e22e>height</span> <span style=color:#f92672>=</span> 1 <span style=color:#f92672>+</span> Math.<span style=color:#a6e22e>max</span>(getHeigh(root.<span style=color:#a6e22e>left</span>), getHeigh(root.<span style=color:#a6e22e>right</span>));
+</span></span></code></pre></div><ul><li><p>高度计算公式：当前节点高度 = 1 + 左右子树高度的最大值；</p></li><li><p>辅助方法<code>getHeigh</code>：处理空节点的高度（空节点高度为 0）：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getHeigh</span>(TreeNode node) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> node <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>?</span> 0 : node.<span style=color:#a6e22e>height</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></li></ul><h4 id=步骤-3计算平衡因子判断是否失衡>步骤 3：计算平衡因子，判断是否失衡</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#75715e>// 3. 计算平衡因子（★期末核心考点★）</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> balance <span style=color:#f92672>=</span> getBalance(root);
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 平衡因子 = 左子树高度 - 右子树高度</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getBalance</span>(TreeNode node) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (node <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> 0;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> getHeigh(node.<span style=color:#a6e22e>left</span>) <span style=color:#f92672>-</span> getHeigh(node.<span style=color:#a6e22e>right</span>);
+</span></span><span style=display:flex><span>    }
+</span></span></code></pre></div><ul><li>平衡因子定义：<code>平衡因子 = 左子树高度 - 右子树高度</code>；</li><li>失衡判定：平衡因子的绝对值 > 1 时，需要旋转调整；</li><li>期末考点：平衡因子的计算公式、失衡的判定条件。</li></ul><h4 id=步骤-4四种失衡情况的旋转调整期末重中之重>步骤 4：四种失衡情况的旋转调整（★期末重中之重★）</h4><p>AVL 树的四种失衡情况对应四种旋转策略，核心是 “左旋” 和 “右旋” 两个基础操作，组合解决所有失衡：</p><table><thead><tr><th>失衡类型</th><th>平衡因子</th><th>插入位置</th><th>旋转策略</th></tr></thead><tbody><tr><td>左左型（LL）</td><td>>1</td><td>左子树的左子树</td><td>右旋</td></tr><tr><td>右右型（RR）</td><td>&lt; -1</td><td>右子树的右子树</td><td>左旋</td></tr><tr><td>左右型（LR）</td><td>>1</td><td>左子树的右子树</td><td>左子树左旋 + 根右旋</td></tr><tr><td>右左型（RL）</td><td>&lt; -1</td><td>右子树的左子树</td><td>右子树右旋 + 根左旋</td></tr></tbody></table><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#75715e>// 4. 旋转调整（四种失衡情况）</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 情况1：LL型（左左）→ 右旋</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (balance <span style=color:#f92672>&gt;</span> 1 <span style=color:#f92672>&amp;&amp;</span> v <span style=color:#f92672>&lt;</span> root.<span style=color:#a6e22e>left</span>.<span style=color:#a6e22e>v</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> rightRotate(root);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 情况2：RR型（右右）→ 左旋</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (balance <span style=color:#f92672>&lt;</span> <span style=color:#f92672>-</span>1 <span style=color:#f92672>&amp;&amp;</span> v <span style=color:#f92672>&gt;</span> root.<span style=color:#a6e22e>right</span>.<span style=color:#a6e22e>v</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> leftRotate(root);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 情况3：LR型（左右）→ 左子树左旋 + 根右旋</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (balance <span style=color:#f92672>&gt;</span> 1 <span style=color:#f92672>&amp;&amp;</span> v <span style=color:#f92672>&gt;</span> root.<span style=color:#a6e22e>left</span>.<span style=color:#a6e22e>v</span>) {
+</span></span><span style=display:flex><span>        root.<span style=color:#a6e22e>left</span> <span style=color:#f92672>=</span> leftRotate(root.<span style=color:#a6e22e>left</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> rightRotate(root);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 情况4：RL型（右左）→ 右子树右旋 + 根左旋</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (balance <span style=color:#f92672>&lt;</span> <span style=color:#f92672>-</span>1 <span style=color:#f92672>&amp;&amp;</span> v <span style=color:#f92672>&lt;</span> root.<span style=color:#a6e22e>right</span>.<span style=color:#a6e22e>v</span>) {
+</span></span><span style=display:flex><span>        root.<span style=color:#a6e22e>right</span> <span style=color:#f92672>=</span> rightRotate(root.<span style=color:#a6e22e>right</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> leftRotate(root);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 未失衡：直接返回当前节点</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> root;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h5 id=基础旋转操作解析>基础旋转操作解析：</h5><ol><li>右旋（解决 LL 型失衡）：</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>private</span> TreeNode <span style=color:#a6e22e>rightRotate</span>(TreeNode y) {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 步骤1：定义临时节点</span>
+</span></span><span style=display:flex><span>    TreeNode x <span style=color:#f92672>=</span> y.<span style=color:#a6e22e>right</span>; <span style=color:#75715e>// 错误修正：原代码笔误，正确应为 TreeNode x = y.left;</span>
+</span></span><span style=display:flex><span>    TreeNode xLeft <span style=color:#f92672>=</span> x.<span style=color:#a6e22e>right</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 步骤2：旋转核心</span>
+</span></span><span style=display:flex><span>    x.<span style=color:#a6e22e>left</span> <span style=color:#f92672>=</span> y;
+</span></span><span style=display:flex><span>    y.<span style=color:#a6e22e>right</span> <span style=color:#f92672>=</span> xLeft;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 步骤3：更新高度（先更新下层节点y，再更新上层节点x）</span>
+</span></span><span style=display:flex><span>    y.<span style=color:#a6e22e>height</span> <span style=color:#f92672>=</span> 1 <span style=color:#f92672>+</span> Math.<span style=color:#a6e22e>max</span>(getHeigh(y.<span style=color:#a6e22e>left</span>), getHeigh(y.<span style=color:#a6e22e>right</span>));
+</span></span><span style=display:flex><span>    x.<span style=color:#a6e22e>height</span> <span style=color:#f92672>=</span> 1 <span style=color:#f92672>+</span> Math.<span style=color:#a6e22e>max</span>(getHeigh(x.<span style=color:#a6e22e>left</span>), getHeigh(x.<span style=color:#a6e22e>right</span>));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 返回新的根节点（x成为新根）</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> x;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>⚠️ 注：原代码中<code>rightRotate</code>方法有笔误（<code>TreeNode x = y.right</code>应为<code>TreeNode x = y.left</code>），已修正，复习时需注意！</p><ol><li>左旋（解决 RR 型失衡）：</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>private</span> TreeNode <span style=color:#a6e22e>leftRotate</span>(TreeNode x) {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 步骤1：定义临时节点</span>
+</span></span><span style=display:flex><span>    TreeNode y <span style=color:#f92672>=</span> x.<span style=color:#a6e22e>left</span>; <span style=color:#75715e>// 错误修正：原代码笔误，正确应为 TreeNode y = x.right;</span>
+</span></span><span style=display:flex><span>    TreeNode yRight <span style=color:#f92672>=</span> y.<span style=color:#a6e22e>right</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 步骤2：旋转核心</span>
+</span></span><span style=display:flex><span>    y.<span style=color:#a6e22e>right</span> <span style=color:#f92672>=</span> x;
+</span></span><span style=display:flex><span>    x.<span style=color:#a6e22e>left</span> <span style=color:#f92672>=</span> yRight;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 步骤3：更新高度</span>
+</span></span><span style=display:flex><span>    x.<span style=color:#a6e22e>height</span> <span style=color:#f92672>=</span> 1 <span style=color:#f92672>+</span> Math.<span style=color:#a6e22e>max</span>(getHeigh(x.<span style=color:#a6e22e>left</span>), getHeigh(x.<span style=color:#a6e22e>right</span>));
+</span></span><span style=display:flex><span>    y.<span style=color:#a6e22e>height</span> <span style=color:#f92672>=</span> 1 <span style=color:#f92672>+</span> Math.<span style=color:#a6e22e>max</span>(getHeigh(y.<span style=color:#a6e22e>left</span>), getHeigh(y.<span style=color:#a6e22e>right</span>));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 返回新的根节点（y成为新根）</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> y;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>⚠️ 原代码<code>leftRotate</code>方法同样有笔误（<code>TreeNode y = x.left</code>应为<code>TreeNode y = x.right</code>），这是关键错误，复习时需重点注意！</p><ul><li>旋转核心逻辑：调整节点的父子关系，同时更新高度；</li><li>期末考点：四种失衡类型的判定、旋转的顺序（如 LR 型先左旋左子树，再右旋根）、旋转后高度的更新。</li></ul><h3 id=模块-3统计叶子节点数量递归经典题>模块 3：统计叶子节点数量（递归经典题）</h3><p>叶子节点定义：左右子节点均为空的节点。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// 对外暴露的方法</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>leave</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> findleave(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>root</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 递归统计叶子节点</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>findleave</span>(TreeNode root) {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 递归终止：空节点，叶子数为0</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (root <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> 0;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 递归统计左、右子树的叶子数</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> l <span style=color:#f92672>=</span> findleave(root.<span style=color:#a6e22e>left</span>);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> r <span style=color:#f92672>=</span> findleave(root.<span style=color:#a6e22e>right</span>);
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 当前节点是叶子：返回1</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (root.<span style=color:#a6e22e>left</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>&amp;&amp;</span> root.<span style=color:#a6e22e>right</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> 1;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 非叶子：返回左右子树叶子数之和</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> l <span style=color:#f92672>+</span> r;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ul><li>递归思路：<strong>分治思想</strong>，把 “统计整棵树的叶子数” 拆解为 “统计左子树叶子数 + 统计右子树叶子数”；</li><li>终止条件：① 空节点返回 0；② 叶子节点返回 1；</li><li>期末考点：递归统计叶子节点的逻辑、终止条件的设计。</li></ul><h3 id=模块-4三种遍历前序中序后序>模块 4：三种遍历（前序、中序、后序）</h3><p>遍历是二叉树的核心考点，AVL 树的遍历和普通二叉树一致，区别仅在于 AVL 树是平衡的 BST，中序遍历结果为<strong>升序序列</strong>。</p><h4 id=核心逻辑对比期末必考>核心逻辑对比（★期末必考★）</h4><table><thead><tr><th>遍历类型</th><th>顺序</th><th>核心特征</th></tr></thead><tbody><tr><td>前序</td><td>根 → 左 → 右</td><td>先访问根节点</td></tr><tr><td>中序</td><td>左 → 根 → 右</td><td>BST 中序遍历为升序</td></tr><tr><td>后序</td><td>左 → 右 → 根</td><td>最后访问根节点</td></tr></tbody></table><h4 id=代码解析以中序为例前序--后序仅调整访问顺序>代码解析（以中序为例，前序 / 后序仅调整访问顺序）</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// 控制输出格式：避免前置空格</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>boolean</span> isFirst <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 对外暴露的中序遍历方法</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>mid</span>() {
+</span></span><span style=display:flex><span>    isFirst <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>; <span style=color:#75715e>// 每次遍历重置标记</span>
+</span></span><span style=display:flex><span>    midprint(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>root</span>);
+</span></span><span style=display:flex><span>    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(); <span style=color:#75715e>// 遍历完换行</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 中序遍历递归逻辑</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>midprint</span>(TreeNode root) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (root <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    midprint(root.<span style=color:#a6e22e>left</span>); <span style=color:#75715e>// 1. 遍历左子树</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 2. 访问根节点（控制输出格式）</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (isFirst) {
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>print</span>(root.<span style=color:#a6e22e>v</span>);
+</span></span><span style=display:flex><span>        isFirst <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>else</span>  {
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>print</span>(<span style=color:#e6db74>&#34; &#34;</span> <span style=color:#f92672>+</span> root.<span style=color:#a6e22e>v</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    midprint(root.<span style=color:#a6e22e>right</span>); <span style=color:#75715e>// 3. 遍历右子树</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ul><li>格式控制：<code>isFirst</code>标记避免输出 “1 2 3” 这种前置空格；</li><li>前序遍历：先访问根，再遍历左、右（<code>frontprint</code>方法）；</li><li>后序遍历：先遍历左、右，再访问根（<code>afterprint</code>方法）；</li><li>期末考点：三种遍历的顺序、递归实现、BST 中序遍历的升序特性。</li></ul><h2 id=四运行示例复习验证>四、运行示例（复习验证）</h2><h3 id=输入>输入</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plaintext data-lang=plaintext><span style=display:flex><span>3 1 4 2 5
+</span></span></code></pre></div><h3 id=执行过程>执行过程</h3><ol><li>插入节点，AVL 树自动平衡；</li><li>统计叶子节点数：最终叶子节点为 2、5，数量为 2；</li><li>前序遍历：3 1 2 4 5；</li><li>后序遍历：2 1 5 4 3；</li><li>中序遍历：1 2 3 4 5（升序，符合 BST 特性）。</li></ol><h3 id=输出>输出</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plaintext data-lang=plaintext><span style=display:flex><span>2
+</span></span><span style=display:flex><span>3 1 2 4 5
+</span></span><span style=display:flex><span>2 1 5 4 3
+</span></span><span style=display:flex><span>1 2 3 4 5
+</span></span></code></pre></div><h2 id=五期末复习核心考点总结>五、期末复习核心考点总结</h2><table><thead><tr><th>考点分类</th><th>核心内容</th></tr></thead><tbody><tr><td>AVL 树基础</td><td>平衡因子定义（左高 - 右高）、失衡判定（绝对值 > 1）、节点高度的定义</td></tr><tr><td>插入逻辑</td><td>BST 插入规则 + 高度更新 + 平衡检查 + 旋转调整</td></tr><tr><td>旋转操作</td><td>四种失衡类型（LL/RR/LR/RL）、左旋 / 右旋的核心逻辑、旋转后高度更新</td></tr><tr><td>二叉树遍历</td><td>前序 / 中序 / 后序的遍历顺序、递归实现、BST 中序遍历升序特性</td></tr><tr><td>递归题</td><td>叶子节点统计的递归逻辑、终止条件设计</td></tr></tbody></table><h2 id=六总结>六、总结</h2><p>本文完整解析了 AVL 树的 Java 实现，涵盖 “插入（含平衡调整）、叶子统计、三种遍历” 三大核心功能，同时针对期末复习标注了关键考点。</p><p>AVL 树的核心是 “平衡”：通过维护平衡因子和旋转操作，解决了普通 BST 退化的问题，是数据结构期末的高频考点。复习时建议重点掌握：</p><ol><li>平衡因子的计算和失衡判定；</li><li>四种失衡类型的旋转策略；</li><li>二叉树三种遍历的递归实现；</li><li>递归统计叶子节点的逻辑。</li></ol></article></div></div></div></div></div></div></main></div><script type=application/javascript src=https://noctis-sikong.github.io/js/toc.js></script><link rel=stylesheet href=https://noctis-sikong.github.io/css/toc.css><div id=gitalk-container class=gitalk-container></div><link rel=stylesheet href=https://noctis-sikong.github.io/css/gitalk.css><script src=https://noctis-sikong.github.io/js/gitalk.min.js></script><script>const gitalk=new Gitalk({clientID:"Ov23liJPJ1rIHChpsuKV",clientSecret:"d73a8d88462d1ea39e6765fe614ad2f85f586622",repo:"blog-comments",owner:"Noctis-SiKong",admin:["Noctis-SiKong"],id:window.location.pathname.substring(0,50),distractionFreeMode:!1});document.addEventListener("DOMContentLoaded",function(){gitalk.render("gitalk-container")})</script></div><div class="footer container-xl width-full p-responsive"><div class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light"><a aria-label=Homepage title=GitHub class="footer-octicon d-none d-lg-block mr-lg-4" href=https://noctis-sikong.github.io/><svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58.0.0 3.58.0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38.0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95.0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12.0.0.67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15.0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48.0 1.07-.01 1.93-.01 2.2.0.21.15.46.55.38A8.013 8.013.0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0"><li class="mr-3 mr-lg-0">Theme by <a href=https://github.com/MeiK2333/github-style>github-style</a></li><li class="mr-3 mr-lg-0">GitHub and the Invertocat logo are trademarks of <a href=https://github.com/>GitHub, Inc.</a></li></ul></div><div class="d-flex flex-justify-center pb-6"><span class="f6 text-gray-light"></span></div></div></body><script type=application/javascript src=https://noctis-sikong.github.io/js/github-style.js></script></html>
