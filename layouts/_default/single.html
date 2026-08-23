@@ -1,0 +1,10 @@
+{{ define "content" }}
+<div class="application-main">
+  {{ if eq .Section "post" }}
+  {{ partial "post.html" . }}
+  {{ partial "gitalk.html" . }}
+  {{ else }}
+  {{ partial "page.html" . }}
+  {{ end }}
+</div>
+{{ end }}
