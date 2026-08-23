@@ -28,30 +28,24 @@ h3.wb-break-all > a:hover {
   text-decoration: underline !important;
 }
 
-/* 1.1 列表页摘要里的标题：降级为普通文字，不抢列表标题风头 */
+/* 1.1 列表页摘要里的标题：彻底隐藏，只保留正文预览（列表标题已经显示过了） */
 .post-summary h1,
 .post-summary h2,
 .post-summary h3,
-.post-summary h4 {
-  font-size: 16px !important;
-  font-weight: 600 !important;
-  color: var(--color-fg-muted, #57606a) !important;
-  border: none !important;
-  padding: 0 !important;
-  margin: 0.5em 0 0.3em !important;
+.post-summary h4,
+.post-summary h5,
+.post-summary h6 {
+  display: none !important;
 }
 
-/* 1.2 首页 pinned 卡片摘要里的标题：同样降级 */
+/* 1.2 首页 pinned 卡片摘要里的标题：同样隐藏 */
 .pinned-item-desc h1,
 .pinned-item-desc h2,
 .pinned-item-desc h3,
-.pinned-item-desc h4 {
-  font-size: 14px !important;
-  font-weight: 600 !important;
-  color: var(--color-fg-muted) !important;
-  border: none !important;
-  padding: 0 !important;
-  margin: 0.3em 0 !important;
+.pinned-item-desc h4,
+.pinned-item-desc h5,
+.pinned-item-desc h6 {
+  display: none !important;
 }
 
 /* 2. 文章页顶部主标题：放大加粗 */
