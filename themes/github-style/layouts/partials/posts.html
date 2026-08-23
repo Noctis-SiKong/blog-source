@@ -21,6 +21,13 @@
           </a>
         </div>
       </div>
+      {{ else if eq .Type "series" }}
+      <div class="TableObject border-bottom border-gray-light py-3">
+        <div class="user-repo-search-results-summary TableObject-item TableObject-item--primary v-align-top">
+          <strong>{{ len .Pages }}</strong> 篇文章
+          属于专栏 <strong>{{ .Title }}</strong>
+        </div>
+      </div>
       {{else}}
         {{/* 修复核心：先判断tags是否存在，再判断长度，避免nil调用len报错 */}}
         {{ if .Site.Taxonomies.tags }}
@@ -46,9 +53,17 @@
             </div>
 
             <div class="f6 text-gray mt-2">
+              {{ with .Params.series }}
+              <a class="muted-link mr-3" href="{{ relURL (print "/series/" . | urlize) }}">
+                <svg class="octicon octicon-book" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                  <path fill-rule="evenodd" d="M0 1.75A.75.75 0 01.75 1h4.253c1.227 0 2.317.59 2.917 1.504l.709.923a.75.75 0 01-.257 1.08l-.79.323A2.25 2.25 0 015.25 6H2.75a.75.75 0 010-1.5h1.714a.75.75 0 00.672-.428L5.146 2.5H1.5v9h3.75a.75.75 0 010 1.5H.75a.75.75 0 01-.75-.75V1.75zm6.75 4a.75.75 0 01.75-.75h2.998a.75.75 0 01.75.75v8.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.75z"></path>
+                </svg>
+                {{ . }}
+              </a>
+              {{ end }}
               {{ with .Params.tags }}
               {{ range $tag := (first 5 .) }}
-              <a class="muted-link mr-3" href="{{ relURL (print " /tags/" . | urlize) }}">
+              <a class="muted-link mr-3" href="{{ relURL (print "/tags/" . | urlize) }}">
                 <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
                   <path fill-rule="evenodd"
                     d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">

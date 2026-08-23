@@ -2,7 +2,9 @@
 title: '拓扑排序（Topological Sort）'
 date: '2025-12-25T19:30:10+08:00'
 draft: false
-series: '数据结构与算法优化'
+series: '数据结构与算法优化'
+categories: ['图论']
+tags: ['拓扑排序', '图论', 'Kahn']
 ---
 
 ## 拓扑排序（Topological Sort）
@@ -15,7 +17,7 @@ series: '数据结构与算法优化'
 
 - 额外需求：若图中存在环（非 DAG），则无法完成拓扑排序，需输出 “not acyclic” 或返回空。
 
-  <!--More-->
+  <!--more-->
 
 ### 算法思想（详细拆解，Kahn 算法 —— 迭代版最优）
 

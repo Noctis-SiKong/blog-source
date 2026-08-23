@@ -19,18 +19,18 @@ jobs:
       - name: 拉取博客源码
         uses: actions/checkout@v4  # 使用 GitHub 官方的「拉取代码」插件
         with:
-          submodules: true  # 关键：拉取主题（因为 hugo 主题通常是 git 子模块）
-          fetch-depth: 0    # 拉取完整的 git 历史，避免构建时出错
+          # 主题已直接内置（vendored），无需拉取 submodule
+          fetch-depth: 0    # 拉取完整的 git 历史，便于 Hugo 计算 lastmod
 
       # 步骤 2：在 Ubuntu 服务器上安装 Hugo（和你本地用的 Hugo 版本一致）
       - name: 安装 Hugo
         uses: peaceiris/actions-hugo@v2  # 第三方成熟的「安装 Hugo」插件
         with:
-          hugo-version: 'latest'  # 安装最新版 Hugo（和你本地的 hugo v0.152.2 兼容）
+          hugo-version: '0.152.2'  # 固定版本，与本地一致，避免 future 版本不兼容
 
       # 步骤 3：在服务器上构建静态文件（和你本地执行 hugo 命令效果一样）
       - name: 构建博客静态文件
-        run: hugo --minify  # 执行 hugo 构建，--minify 压缩文件（加载更快）
+        run: hugo --minify --cleanDestinationDir  # 构建 + 压缩 + 清理旧产物
 
       # 步骤 4：把构建好的 public/ 目录推送到你的 Pages 仓库
       - name: 部署到 GitHub Pages 仓库

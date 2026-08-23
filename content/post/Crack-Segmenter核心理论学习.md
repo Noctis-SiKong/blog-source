@@ -4,7 +4,9 @@ title: 'Crack-Segmenter核心理论学习'
 date: '2025-12-12T19:30:10+08:00'
 draft: false
 
-series: '工业视觉'
+series: '工业视觉'
+categories: ['深度学习']
+tags: ['深度学习', '图像分割', '自监督学习']
 
 ---
 
@@ -311,7 +313,7 @@ class CrossScaleConsistencyLoss(nn.Module):
 ## 1. 代码使用步骤（基于GitHub仓库）
 
 1. 克隆仓库：`git clone https://github.com/Blessing988/Crack-Segmenter.git`；
-2. 安装依赖：按仓库 `requirements.txt` 配置，推荐版本：PyTorch 1.18.0+、OpenCV-Python 4.8.1+；
+2. 安装依赖：按仓库 `requirements.txt` 配置，推荐版本：PyTorch 2.x、OpenCV-Python 4.8.1+；
 3. 数据准备：下载公开数据集（CFD：https://www.kaggle.com/datasets/crawford/deepcrack；Crack500：https://github.com/fyangneil/pavement-crack-detection），或导入自有手机屏幕裂缝数据集；
 4. 复现与优化：修改配置文件 `configs/crack_segmenter.yaml`，运行 `train.py` 复现实验，基于SAE/DAT/AGF模块做场景适配。
 

@@ -1,66 +1,78 @@
 # ===================== 基础核心配置 =====================
+# GitHub Pages 的 URL 不区分大小写，官方推荐使用小写形式
 baseURL = "https://noctis-sikong.github.io"
 languageCode = "zh-cn"
 title = "一切都是命运石之门的选择！"
 theme = "github-style"
-summaryLength = 10
-enableSearch = true  # 全局开启搜索
+summaryLength = 70
 
-# 关键：配置搜索索引的输出格式（生成search.json）
-[outputFormats.SearchJSON]
-baseName = "search"          # 输出文件名为 search.json
-mediaType = "application/json"
-isPlainText = true
-notAlternative = true
-
-# 修正home页面的输出类型（使用自定义的SearchJSON）
-[outputs]
-home = ["HTML", "RSS", "SearchJSON"]  # 替换原来的JSON为SearchJSON
-
-# ===================== 分类法配置（新增专栏核心） =====================
+# ===================== 分类法配置（专栏核心） =====================
+# 注意：左侧是 frontmatter 字段名（单数），右侧是 URL 前缀（复数）
+# frontmatter 中使用右侧的复数形式：series / categories / tags
 [taxonomies]
-  series = "series"    # 启用「专栏」功能（核心）
-  category = "category"# 保留分类（可选，不用可删）
-  tag = "tag"          # 保留标签（可选，不用可删）
+  series = "series"          # 专栏（frontmatter 用 series）
+  category = "categories"    # 分类（frontmatter 用 categories，URL /categories/）
+  tag = "tags"               # 标签（frontmatter 用 tags，URL /tags/）
+
+# ===================== 首页输出类型 =====================
+# 使用 Hugo 内置 JSON 输出格式生成 index.json，供站内 Fuse.js 搜索使用
+# （主题的 search.js 会请求 /index.json）
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
 
 # ===================== 个性化参数 =====================
 [params]
   # 基础个人信息
-  avatar = "/克里斯.jpg"        
-  author = "天才变态少女"   
-  location = "东京秋叶原"        
-  userStatusEmoji = "😎"        
+  avatar = "/克里斯.jpg"
+  author = "天才变态少女"
+  description = "算法、数据结构、深度学习与图像分割的学习笔记。"
+  keywords = "算法, 数据结构, 深度学习, 图像分割, 图论"
+  location = "东京秋叶原"
+  userStatusEmoji = "😎"
   github = "Noctis-SiKong"
   twitter = "almosy"
-  email = "hui703101@163.com"        
-  favicon = "/R-C.png"      
-  headerIcon = "/R-C.png"    
-  custom_css = ["css/custom.css"]  
-  custom_js = ["js/custom.js"]    
-  lastmod = true                
-  enableGitalk = true  
-  rss = true                    
+  email = "hui703101@163.com"
+  favicon = "/R-C.png"
+  headerIcon = "/R-C.png"
+  custom_css = ["css/custom.css"]
+  custom_js = ["js/custom.js"]
+  lastmod = true
+  enableGitalk = false
+  rss = true
+
+  # 站内搜索开关（必须位于 [params] 下，主题通过 .Site.Params.enableSearch 读取）
+  enableSearch = true
 
   # 搜索功能自定义
   [params.search]
-    fuseJs = true  
-    maxResultLength = 10  
-    threshold = 0.6      
+    fuseJs = true
+    maxResultLength = 10
+    threshold = 0.6
 
-  # 专栏功能配置（新增）
+  # 专栏功能配置
   [params.series]
-    enable = true        # 开启专栏功能
-    title = "我的专栏"   # 专栏页面标题
-    showCount = true     # 显示每个专栏的文章数量
+    enable = true
+    title = "我的专栏"
+    showCount = true
 
 # ===================== 最后修改时间配置 =====================
 [frontmatter]
 lastmod = ["lastmod", ":fileModTime", ":default"]
 
-# ===================== Gitalk评论配置（修正clientSecret冒号错误） =====================
-[params.gitalk]
-  clientID = "Ov23liJPJ1rIHChpsuKV"  
-  clientSecret = "d73a8d88462d1ea39e6765fe614ad2f85f586622"  # 已删除多余冒号，避免评论报错
-  repo = "blog-comments"  
-  owner = "Noctis-SiKong"  
-  admin = ["Noctis-SiKong"]
+# ===================== Gitalk 评论配置 =====================
+# ⚠️ 安全说明：
+#   1. clientSecret 绝不能放在前端或提交到公开仓库。旧配置里明文存放过
+#      clientSecret，请立即到 GitHub → Settings → Developer settings →
+#      OAuth Apps 重置（regenerate）该密钥。
+#   2. Gitalk 是纯前端应用，浏览器直连 GitHub 的 access_token 接口会被
+#      CORS 拦截，需要反向代理(proxy)或 serverless 中转，且 secret 应保存在
+#      服务端，绝不能随页面下发。
+#   3. 因此这里暂不启用评论。若要重新启用，参考下面模板（用 proxy，不放 secret），
+#      并把 enableGitalk 改为 true：
+#
+# [params.gitalk]
+#   clientID = "Ov23liJPJ1rIHChpsuKV"   # clientID 是公开标识，可以保留
+#   repo = "blog-comments"
+#   owner = "Noctis-SiKong"
+#   admin = ["Noctis-SiKong"]
+#   proxy = "https://你的代理地址/https://github.com/login/oauth/access_token"
