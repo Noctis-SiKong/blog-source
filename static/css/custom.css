@@ -19,13 +19,39 @@ body {
 
 /* 1. 列表页文章标题：放大加粗，明确「这是标题」 */
 h3.wb-break-all > a {
-  font-size: 22px !important;
+  font-size: 24px !important;
   font-weight: 700 !important;
   color: var(--color-accent-fg) !important;
   text-decoration: none !important;
 }
 h3.wb-break-all > a:hover {
   text-decoration: underline !important;
+}
+
+/* 1.1 列表页摘要里的标题：降级为普通文字，不抢列表标题风头 */
+.post-summary h1,
+.post-summary h2,
+.post-summary h3,
+.post-summary h4 {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: var(--color-fg-muted, #57606a) !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0.5em 0 0.3em !important;
+}
+
+/* 1.2 首页 pinned 卡片摘要里的标题：同样降级 */
+.pinned-item-desc h1,
+.pinned-item-desc h2,
+.pinned-item-desc h3,
+.pinned-item-desc h4 {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: var(--color-fg-muted) !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0.3em 0 !important;
 }
 
 /* 2. 文章页顶部主标题：放大加粗 */
