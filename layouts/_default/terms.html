@@ -1,30 +1,5 @@
 {{ define "content" }}
 <div class="application-main">
   {{ partial "user-profile.html" . }}
-  <div class="container-xl px-3 px-md-4 px-lg-5">
-    <div class="gutter-condensed gutter-lg flex-column flex-md-row d-flex">
-      <div class="flex-shrink-0 col-12 col-md-9 mb-4 mb-md-0">
-        {{ if eq .Data.Plural "series" }}
-        <h2 class="f4 text-normal mb-3">{{ .Site.Params.series.title }}</h2>
-        {{ else }}
-        <h2 class="f4 text-normal mb-3">{{ .Title }}</h2>
-        {{ end }}
-        <ul>
-          {{ range .Data.Terms.Alphabetical }}
-          <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary">
-            <div class="d-flex flex-justify-between width-full flex-items-center">
-              <h3 class="wb-break-all m-0">
-                <a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a>
-              </h3>
-              {{ if $.Site.Params.series.showCount }}
-              <span class="text-gray">{{ .Count }} 篇</span>
-              {{ end }}
-            </div>
-          </li>
-          {{ end }}
-        </ul>
-      </div>
-    </div>
-  </div>
 </div>
 {{ end }}
