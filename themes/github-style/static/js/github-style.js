@@ -1,5 +1,5 @@
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const monthsFull = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+const monthsFull = ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"];
 const now = new Date();
 let contributions;
 
@@ -81,7 +81,7 @@ function monthly(year, month, posts) {
       class="col-8 css-truncate css-truncate-target lh-condensed width-fit flex-auto min-width-0">
       <a href="${post.link}">${post.title}</a>
     </div>
-    <time  title="This post was made on ${months[post.date.getMonth()]} ${post.date.getDate()}"
+    <time  title="这篇文章发布于 ${months[post.date.getMonth()]} ${post.date.getDate()} 日"
       class="col-2 text-right f6 text-gray-light pt-1">
       ${months[post.date.getMonth()]} ${post.date.getDate()}
     </time>
@@ -107,7 +107,7 @@ function monthly(year, month, posts) {
           <details class="Details-element details-reset" open>
             <summary role="button" class="btn-link f4 muted-link no-underline lh-condensed width-full">
               <span class="color-text-primary ws-normal text-left">
-                Created ${monthPosts.length} post${monthPosts.length > 1 ? 's' : ''}
+                发布了 ${monthPosts.length} 篇文章
               </span>
               <span class="d-inline-block float-right color-icon-secondary">
                 <span class="Details-content--open float-right">
@@ -156,11 +156,11 @@ function yearList() {
 }
 
 function graph(year, posts, startDate, endDate) {
-  const postsStr = posts.length === 1 ? "post" : "posts";
+  const postsStr = posts.length === 1 ? "篇文章" : "篇文章";
   if (year === now.getFullYear().toString()) {
-    document.querySelector('#posts-count').innerText = `${posts.length}  ${postsStr} in the last year`;
+    document.querySelector('#posts-count').innerText = `最近一年共发布 ${posts.length} ${postsStr}`;
   } else {
-    document.querySelector('#posts-count').innerText = `${posts.length}  ${postsStr} in ${year}`;
+    document.querySelector('#posts-count').innerText = `${year} 年共发布 ${posts.length} ${postsStr}`;
   }
 
   let html = ``;

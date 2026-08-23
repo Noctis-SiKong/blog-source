@@ -58,7 +58,7 @@
 
                 {{/* 核心修改2：摘要缩短为100字符 + 加省略号（可改100为80/120） */}}
                 <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  {{ printf "%.100s" .Summary | safeHTML }}...
+                  {{ .Summary | truncate 100 }}...
                 </div>
 
                 <p class="mb-0 f6 text-gray">
