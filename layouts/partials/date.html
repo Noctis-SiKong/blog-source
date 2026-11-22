@@ -1,0 +1,2 @@
+{{- if .Date.IsZero -}}<span>日期未填写</span>{{- else -}}
+<time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" title="{{ .Date.Format "2006-01-02 15:04:05 -07:00" }}">{{ .Date.Format "2006.01.02" }}{{ if ne (.Date.Format "15:04:05") "00:00:00" }} {{ .Date.Format "15:04:05" }}{{ end }}</time>{{- end -}}

@@ -1,10 +1,15 @@
-{{ define "content" }}
-<div class="application-main">
-  {{ if eq .Section "post" }}
-  {{ partial "post.html" . }}
-  {{ partial "gitalk.html" . }}
-  {{ else }}
-  {{ partial "page.html" . }}
-  {{ end }}
+{{ define "main" }}
+{{ if eq .Section "post" }}
+<div class="reader wrap">
+  <nav class="reader-tools" aria-label="阅读工具">
+    <a data-return class="back" href="{{ "post/" | relURL }}">{{ partial "icon.html" "back" }} <span>文章列表</span></a>
+    <div><span id="read-percent" aria-hidden="true">0%</span>{{ if .Fragments.Identifiers }}<details class="toc"><summary>{{ partial "icon.html" "toc" }} 目录</summary><div class="toc-panel">{{ .TableOfContents }}</div></details>{{ end }}</div>
+  </nav>
+  <article><header class="article-head"><div class="meta">{{ range .GetTerms "categories" }}<a class="category" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}</div>
+    <h1>{{ .Title }}</h1><div class="article-info"><a href="{{ "about/" | relURL }}">{{ site.Params.author }}</a><span>·</span>{{ partial "date.html" . }}</div></header>
+    <div class="prose" id="article-body">{{ .Content }}</div>
+    <footer class="article-foot">{{ with .GetTerms "tags" }}<div><span>标签</span>{{ range . }}<a href="{{ .RelPermalink }}"># {{ .LinkTitle }}</a>{{ end }}</div>{{ end }}{{ with .GetTerms "series" }}<div><span>专栏</span>{{ range . }}<a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}</div>{{ end }}
+    <a data-return class="back" href="{{ "post/" | relURL }}">{{ partial "icon.html" "back" }} <span>文章列表</span></a></footer>
+  </article>
 </div>
-{{ end }}
+{{ else }}<article class="reader wrap simple"><div class="page-heading"><h1>{{ .Title }}</h1></div><div class="prose">{{ .Content }}</div></article>{{ end }}{{ end }}

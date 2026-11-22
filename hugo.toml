@@ -1,78 +1,42 @@
-# ===================== 基础核心配置 =====================
-# GitHub Pages 的 URL 不区分大小写，官方推荐使用小写形式
-baseURL = "https://noctis-sikong.github.io"
+baseURL = "https://noctis-sikong.github.io/"
 languageCode = "zh-cn"
+defaultContentLanguage = "zh-cn"
 title = "一切都是命运石之门的选择！"
-theme = "github-style"
+hasCJKLanguage = true
+timeZone = "Asia/Shanghai"
 summaryLength = 70
 
-# ===================== 分类法配置（专栏核心） =====================
-# 注意：左侧是 frontmatter 字段名（单数），右侧是 URL 前缀（复数）
-# frontmatter 中使用右侧的复数形式：series / categories / tags
-[taxonomies]
-  series = "series"          # 专栏（frontmatter 用 series）
-  category = "categories"    # 分类（frontmatter 用 categories，URL /categories/）
-  tag = "tags"               # 标签（frontmatter 用 tags，URL /tags/）
+[params]
+  brand = "Noctis 手记"
+  author = "天才变态少女"
+  description = "算法、数据结构、深度学习与图像分割的学习笔记。"
+  avatar = "/克里斯.jpg"
+  github = "Noctis-SiKong"
+  email = "hui703101@163.com"
 
-# ===================== 首页输出类型 =====================
-# 使用 Hugo 内置 JSON 输出格式生成 index.json，供站内 Fuse.js 搜索使用
-# （主题的 search.js 会请求 /index.json）
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"
+
+[frontmatter]
+  date = ["date"]
+  publishDate = ["publishDate", "date"]
+  lastmod = ["lastmod", "date"]
+
 [outputs]
   home = ["HTML", "RSS", "JSON"]
 
-# ===================== 个性化参数 =====================
-[params]
-  # 基础个人信息
-  avatar = "/克里斯.jpg"
-  author = "天才变态少女"
-  description = "算法、数据结构、深度学习与图像分割的学习笔记。"
-  keywords = "算法, 数据结构, 深度学习, 图像分割, 图论"
-  location = "东京秋叶原"
-  userStatusEmoji = "😎"
-  github = "Noctis-SiKong"
-  twitter = "almosy"
-  email = "hui703101@163.com"
-  favicon = "/R-C.png"
-  headerIcon = "/R-C.png"
-  custom_css = ["css/custom.css"]
-  custom_js = ["js/custom.js"]
-  lastmod = true
-  enableGitalk = false
-  rss = true
+[pagination]
+  pagerSize = 10
 
-  # 站内搜索开关（必须位于 [params] 下，主题通过 .Site.Params.enableSearch 读取）
-  enableSearch = true
-
-  # 搜索功能自定义
-  [params.search]
-    fuseJs = true
-    maxResultLength = 10
-    threshold = 0.6
-
-  # 专栏功能配置
-  [params.series]
-    enable = true
-    title = "我的专栏"
-    showCount = true
-
-# ===================== 最后修改时间配置 =====================
-[frontmatter]
-lastmod = ["lastmod", ":fileModTime", ":default"]
-
-# ===================== Gitalk 评论配置 =====================
-# ⚠️ 安全说明：
-#   1. clientSecret 绝不能放在前端或提交到公开仓库。旧配置里明文存放过
-#      clientSecret，请立即到 GitHub → Settings → Developer settings →
-#      OAuth Apps 重置（regenerate）该密钥。
-#   2. Gitalk 是纯前端应用，浏览器直连 GitHub 的 access_token 接口会被
-#      CORS 拦截，需要反向代理(proxy)或 serverless 中转，且 secret 应保存在
-#      服务端，绝不能随页面下发。
-#   3. 因此这里暂不启用评论。若要重新启用，参考下面模板（用 proxy，不放 secret），
-#      并把 enableGitalk 改为 true：
-#
-# [params.gitalk]
-#   clientID = "Ov23liJPJ1rIHChpsuKV"   # clientID 是公开标识，可以保留
-#   repo = "blog-comments"
-#   owner = "Noctis-SiKong"
-#   admin = ["Noctis-SiKong"]
-#   proxy = "https://你的代理地址/https://github.com/login/oauth/access_token"
+[markup.highlight]
+  noClasses = false
+[markup.tableOfContents]
+  startLevel = 1
+  endLevel = 3
+[markup.goldmark.extensions.passthrough]
+  enable = true
+[markup.goldmark.extensions.passthrough.delimiters]
+  block = [['$$', '$$'], ['\[', '\]']]
+  inline = [['\(', '\)'], ['$', '$']]

@@ -1,5 +1,4 @@
-{{ define "content" }}
-<div class="application-main">
-  {{ partial "user-profile.html" . }}
-</div>
-{{ end }}
+{{ define "main" }}<div class="collection wrap"><div class="page-heading"><h1>{{ partial "label.html" . }}</h1><span>{{ len .Data.Terms }} 项</span></div>
+<nav class="taxonomy-nav" aria-label="浏览索引">{{ $section := .Section }}{{ range slice (slice "categories" "分类") (slice "tags" "标签") (slice "series" "专栏") }}<a href="{{ printf "%s/" (index . 0) | relURL }}" {{ if eq $section (index . 0) }}aria-current="page"{{ end }}>{{ index . 1 }}</a>{{ end }}</nav>
+<ul class="term-grid">{{ range .Data.Terms.ByCount }}<li><a href="{{ .Page.RelPermalink }}"><strong>{{ .Page.LinkTitle }}</strong><span>{{ .Count }} 篇 {{ partial "icon.html" "chevron" }}</span></a></li>{{ end }}</ul>
+</div>{{ end }}

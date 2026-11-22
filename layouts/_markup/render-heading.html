@@ -1,0 +1,5 @@
+{{- $level := .Level -}}
+{{- if and (eq .Page.Section "post") (where .Page.Fragments.Headings "Level" 1) -}}
+  {{- $level = math.Min 6 (add $level 1) | int -}}
+{{- end -}}
+{{ (printf "<h%d id=%q>" $level .Anchor) | safeHTML }}{{ .Text }}{{ (printf "</h%d>" $level) | safeHTML }}

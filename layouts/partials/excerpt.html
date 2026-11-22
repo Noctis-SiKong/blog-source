@@ -1,0 +1,4 @@
+{{- $body := replaceRE "(?is)<h[1-6][^>]*>.*?</h[1-6]>" "" .Summary -}}
+{{- $paragraphs := findRE "(?is)<p(?: [^>]*)?>.*?</p>" $body 1 -}}
+{{- $text := $body -}}{{ with $paragraphs }}{{ $text = index . 0 }}{{ end -}}
+{{- return ($text | plainify | htmlUnescape | strings.TrimSpace | truncate 88) -}}

@@ -18,7 +18,7 @@ draft: false
 
 ## 关于博客
 
-这个博客用 [Hugo](https://gohugo.io/) + [github-style](https://github.com/MeiK2333/github-style) 主题搭建，部署在 GitHub Pages 上，所有文章以 Markdown 写作。
+这个博客用 [Hugo](https://gohugo.io/)搭建，部署在 GitHub Pages 上，所有文章以 Markdown 写作。
 
 建站的初衷是「把学过的内容讲清楚、留下来」——记录学习笔记、刷题总结与项目复盘，也作为一份公开的作品集。
 

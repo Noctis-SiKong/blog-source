@@ -1,0 +1,14 @@
+{{ define "main" }}
+<div class="wrap home">
+  <section class="hero" aria-labelledby="site-title">
+    {{ $art := resources.Get "media/worldline.png" }}{{ $wide := $art.Resize "1600x webp q83" }}{{ $small := $art.Resize "840x webp q80" }}<img class="hero-image" src="{{ $wide.RelPermalink }}" srcset="{{ $small.RelPermalink }} 840w, {{ $wide.RelPermalink }} 1600w" sizes="(max-width: 720px) 100vw, 1200px" fetchpriority="high" alt="" width="1536" height="600">
+    <div class="hero-copy"><a class="byline" href="{{ "about/" | relURL }}"><img src="{{ site.Params.avatar | relURL }}" alt="" width="26" height="26">{{ site.Params.author }}<span>的个人博客</span></a>
+    <h1 id="site-title">一切都是<br>命运石之门的选择<span>！</span></h1>
+    <p>{{ site.Params.description }}</p></div>
+  </section>
+  <div class="home-grid"><section><div class="section-heading"><h2>最新文章</h2><a href="{{ "post/" | relURL }}">全部文章 {{ partial "icon.html" "next" }}</a></div>
+    {{ range first 6 (where site.RegularPages "Section" "post").ByDate.Reverse }}{{ partial "row.html" . }}{{ else }}<p>暂无文章。</p>{{ end }}
+  </section><aside class="browse"><section><div class="section-heading"><h2>{{ partial "icon.html" "folder" }} 文章分类</h2><a href="{{ "categories/" | relURL }}" aria-label="查看所有分类">{{ partial "icon.html" "next" }}</a></div>
+    {{ range site.Taxonomies.categories.ByCount }}<a class="browse-link" href="{{ .Page.RelPermalink }}"><span>{{ .Page.LinkTitle }}</span><span>{{ .Count }}</span></a>{{ end }}</section>
+    <section><div class="section-heading"><h2>{{ partial "icon.html" "books" }} 写作专栏</h2><a href="{{ "series/" | relURL }}" aria-label="查看所有专栏">{{ partial "icon.html" "next" }}</a></div>{{ range site.Taxonomies.series.ByCount }}<a class="browse-link" href="{{ .Page.RelPermalink }}"><span>{{ .Page.LinkTitle }}</span>{{ partial "icon.html" "chevron" }}</a>{{ end }}</section></aside></div>
+</div>{{ end }}

@@ -1,0 +1,1 @@
+{{- if .IsHome -}}首页{{- else if eq .Kind "section" -}}{{ if eq .Section "post" }}全部文章{{ else }}{{ .Title }}{{ end }}{{- else if eq .Kind "taxonomy" -}}{{ index (dict "categories" "分类" "tags" "标签" "series" "专栏") .Data.Plural | default .Title }}{{- else -}}{{ .Title }}{{- end -}}

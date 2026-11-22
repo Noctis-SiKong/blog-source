@@ -1,0 +1,5 @@
+{{- $entries := slice -}}
+{{- range (where site.RegularPages "Section" "post").ByDate.Reverse -}}
+  {{- $terms := slice -}}{{ range slice (.GetTerms "categories") (.GetTerms "tags") (.GetTerms "series") }}{{ range . }}{{ $terms = $terms | append .LinkTitle }}{{ end }}{{ end -}}
+  {{- $entries = $entries | append (dict "title" .Title "url" .RelPermalink "date" (cond .Date.IsZero "" (.Date.Format "2006.01.02")) "terms" $terms "summary" (partial "excerpt.html" .) "text" .Plain) -}}
+{{- end -}}{{- $entries | jsonify -}}

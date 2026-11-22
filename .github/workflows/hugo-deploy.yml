@@ -27,6 +27,7 @@ jobs:
         uses: peaceiris/actions-hugo@v2  # 第三方成熟的「安装 Hugo」插件
         with:
           hugo-version: '0.152.2'  # 固定版本，与本地一致，避免 future 版本不兼容
+          extended: true  # 首页题图需要在构建时编码为 WebP
 
       # 步骤 3：在服务器上构建静态文件（和你本地执行 hugo 命令效果一样）
       - name: 构建博客静态文件

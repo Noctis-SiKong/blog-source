@@ -1,0 +1,2 @@
+{{ define "main" }}<div class="collection wrap" id="search-page" data-index="{{ "index.json" | relURL }}"><div class="page-heading"><h1>搜索文章</h1></div>
+<form class="search-form" role="search" method="get" action="{{ .RelPermalink }}"><label for="query">关键词</label><div>{{ partial "icon.html" "search" }}<input type="search" id="query" name="q" placeholder="搜索标题、分类、标签或正文"><button>搜索</button></div></form><p role="status" id="search-status"></p><div id="results"></div><noscript>搜索需要启用 JavaScript。<a href="{{ "post/" | relURL }}">浏览全部文章</a></noscript></div>{{ end }}

@@ -1,0 +1,7 @@
+<header class="masthead"><div class="wrap bar">
+<a class="brand" href="{{ site.Home.RelPermalink }}">{{ partial "icon.html" "mark" }}<span>{{ site.Params.brand }}</span></a>
+<nav id="site-nav" aria-label="主导航">{{ $current := . }}{{ range slice (slice "" "首页") (slice "post" "文章") (slice "categories" "分类") (slice "tags" "标签") (slice "archives" "归档") (slice "about" "关于") }}
+{{ $slug := index . 0 }}{{ $path := cond (eq $slug "") "" (printf "%s/" $slug) }}
+<a href="{{ $path | relURL }}" {{ if or (and $current.IsHome (eq $slug "")) (and (ne $slug "") (or (eq $current.Section $slug) (eq $current.RelPermalink ($path | relURL)))) }}aria-current="page"{{ end }}>{{ index . 1 }}</a>{{ end }}</nav>
+<div class="tools"><a class="icon-btn" aria-label="搜索文章" title="搜索文章" href="{{ "search/" | relURL }}">{{ partial "icon.html" "search" }}</a><button class="icon-btn js-control" id="theme-button" aria-label="切换主题" title="切换主题">{{ partial "icon.html" "theme" }}</button><button class="icon-btn mobile-menu js-control" id="menu-button" aria-label="导航菜单" aria-expanded="false" aria-controls="site-nav">{{ partial "icon.html" "menu" }}</button></div>
+</div>{{ if and .IsPage (eq .Section "post") }}<div class="reading-track"><progress id="progress" max="100" value="0" aria-label="阅读进度"></progress></div>{{ end }}</header>

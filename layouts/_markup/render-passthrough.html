@@ -1,0 +1,1 @@
+{{- $block := eq .Type "block" -}}{{ if $block }}<div class="formula">{{ end }}{{ transform.ToMath .Inner (dict "displayMode" $block "throwOnError" false) }}{{ if $block }}</div>{{ end -}}

@@ -1,0 +1,5 @@
+<article class="post-row">
+  <div class="meta">{{ with .GetTerms "categories" }}{{ range first 1 . }}<a class="category" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}<span aria-hidden="true">/</span>{{ end }}{{ if not .Date.IsZero }}<time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "2006.01.02" }}</time>{{ else }}<span>日期未填写</span>{{ end }}</div>
+  <h3><a href="{{ .RelPermalink }}">{{ .Title }}<span class="row-arrow">{{ partial "icon.html" "next" }}</span></a></h3>
+  {{ with partial "excerpt.html" . }}<p>{{ . }}</p>{{ end }}
+</article>
