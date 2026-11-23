@@ -7,6 +7,22 @@
   <meta name="description" content="{{ if and .IsPage (eq .Section "post") }}{{ partial "excerpt.html" . }}{{ else }}{{ site.Params.description }}{{ end }}">
   <link rel="icon" href="{{ "R-C.png" | relURL }}"><link rel="alternate" type="application/rss+xml" title="{{ site.Params.brand }}" href="{{ "index.xml" | relURL }}">
   <script>try { const theme = localStorage.getItem('noctis-theme'); if (theme === 'dark' || theme === 'light') document.documentElement.dataset.theme = theme; } catch {}</script>
+  <script>
+    // Register before first paint, including when history restores a cached document.
+    function showEntryFallback(event) {
+      const nav = performance.getEntriesByType('navigation')[0];
+      const activation = window.navigation?.activation;
+      const previous = activation?.from?.url || document.referrer;
+      const internal = previous && new URL(previous).origin === location.origin;
+      const traversing = activation?.navigationType === 'traverse' || nav?.type === 'back_forward';
+      document.documentElement.classList.toggle('page-enter',
+        !event?.viewTransition && (internal || traversing) && (traversing || nav?.type === 'navigate') &&
+        matchMedia('(prefers-reduced-motion: no-preference)').matches);
+    }
+    if ('onpagereveal' in window) addEventListener('pagereveal', showEntryFallback);
+    else showEntryFallback();
+    addEventListener('pagehide', () => document.documentElement.classList.remove('page-enter'));
+  </script>
   {{ $css := resources.Get "blog.css" | minify | fingerprint }}<link rel="stylesheet" href="{{ $css.RelPermalink }}">
   <script type="speculationrules">
     {"prefetch":[{"where":{"selector_matches":"#site-nav a, .post-row h3 a, .section-heading a, .browse-link, .pagination a"},"eagerness":"moderate"}]}

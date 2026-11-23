@@ -74,13 +74,9 @@ window.addEventListener("pagehide", clearNavigationFeedback);
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") clearNavigationFeedback();
 });
-if (!("CSSViewTransitionRule" in window) && visitType === "navigate" &&
-    document.referrer && new URL(document.referrer).origin === location.origin) {
-  document.documentElement.classList.add("page-enter");
-  document.getElementById("main").addEventListener("animationend", (event) => {
-    if (event.animationName === "page-in") document.documentElement.classList.remove("page-enter");
-  });
-}
+document.getElementById("main").addEventListener("animationend", (event) => {
+  if (event.animationName === "page-in") document.documentElement.classList.remove("page-enter");
+});
 try {
   const source = JSON.parse(sessionStorage.getItem(entryKey));
   sessionStorage.removeItem(entryKey);
