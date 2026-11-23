@@ -3,6 +3,6 @@
 <div class="page-heading"><h1>{{ partial "label.html" . }}</h1><span>{{ len .RegularPages }} 篇文章</span></div>
 {{ if eq .Section "post" }}<nav class="chips" aria-label="按分类浏览"><a aria-current="page" href="{{ .RelPermalink }}">全部</a>{{ range site.Taxonomies.categories.ByCount }}<a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}</a>{{ end }}</nav>{{ end }}
 {{ $pager := .Paginate .RegularPages.ByDate.Reverse }}
-{{ range $pager.Pages }}{{ partial "row.html" . }}{{ else }}<p>这里还没有文章。</p>{{ end }}
+<div class="index-rows">{{ range $pager.Pages }}{{ partial "row.html" . }}{{ else }}<p>这里还没有文章。</p>{{ end }}</div>
 {{ if gt $pager.TotalPages 1 }}<nav class="pagination" aria-label="文章分页">{{ with $pager.Prev }}<a href="{{ .URL }}">{{ partial "icon.html" "back" }} 上一页</a>{{ end }}<span>第 {{ $pager.PageNumber }} / {{ $pager.TotalPages }} 页</span>{{ with $pager.Next }}<a href="{{ .URL }}">下一页 {{ partial "icon.html" "next" }}</a>{{ end }}</nav>{{ end }}
 </div>{{ end }}

@@ -1,10 +1,10 @@
 {{ define "main" }}
 {{ if eq .Section "post" }}
-<div class="reader wrap">
-  <nav class="reader-tools" aria-label="阅读工具">
+<div class="reader reader-layout wrap">
+  <aside class="reader-tools" aria-label="阅读工具">
     <a data-return class="back" href="{{ "post/" | relURL }}">{{ partial "icon.html" "back" }} <span>文章列表</span></a>
-    <div><span id="read-percent" aria-hidden="true">0%</span>{{ if .Fragments.Identifiers }}<details class="toc"><summary>{{ partial "icon.html" "toc" }} 目录</summary><div class="toc-panel">{{ .TableOfContents }}</div></details>{{ end }}</div>
-  </nav>
+    <div><span class="read-status"><span class="wide-label">阅读进度 </span><span id="read-percent" aria-hidden="true">0%</span></span>{{ if .Fragments.Identifiers }}<h2 class="outline-title">本文目录</h2><details class="toc"><summary>{{ partial "icon.html" "toc" }} 目录</summary><div class="toc-panel">{{ .TableOfContents }}</div></details>{{ end }}</div>
+  </aside>
   <article><header class="article-head"><div class="meta">{{ range .GetTerms "categories" }}<a class="category" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}</div>
     <h1>{{ .Title }}</h1><div class="article-info"><a href="{{ "about/" | relURL }}">{{ site.Params.author }}</a><span>·</span>{{ partial "date.html" . }}</div></header>
     <div class="prose" id="article-body">{{ .Content }}</div>

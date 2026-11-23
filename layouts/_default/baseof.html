@@ -8,6 +8,9 @@
   <link rel="icon" href="{{ "R-C.png" | relURL }}"><link rel="alternate" type="application/rss+xml" title="{{ site.Params.brand }}" href="{{ "index.xml" | relURL }}">
   <script>try { const theme = localStorage.getItem('noctis-theme'); if (theme === 'dark' || theme === 'light') document.documentElement.dataset.theme = theme; } catch {}</script>
   {{ $css := resources.Get "blog.css" | minify | fingerprint }}<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+  <script type="speculationrules">
+    {"prefetch":[{"where":{"selector_matches":"#site-nav a, .post-row h3 a, .section-heading a, .browse-link, .pagination a"},"eagerness":"moderate"}]}
+  </script>
   {{ $js := resources.Get "blog.js" | minify | fingerprint }}<script defer src="{{ $js.RelPermalink }}"></script>
 </head>
 <body>

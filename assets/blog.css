@@ -596,6 +596,9 @@ p {
 .reader.simple {
   padding-top: 44px;
 }
+.wide-label, .outline-title {
+  display: none;
+}
 .reader-tools {
   display: flex;
   justify-content: space-between;
@@ -886,6 +889,81 @@ p {
     corner-shape: squircle;
   }
 }
+/* Desktop reading pairs the manuscript with a persistent outline. */
+@media (min-width: 1040px) {
+  html {
+    scroll-padding-top: calc(var(--bar) + 26px);
+  }
+  .wrap {
+    width: min(1440px, calc(100% - 2 * var(--gutter)));
+  }
+  .reader-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(220px, 19vw, 306px);
+    align-items: start;
+    gap: clamp(44px, 5vw, 90px);
+    max-width: 1330px;
+    padding-top: clamp(30px, 3vw, 52px);
+  }
+  .reader-layout > article {
+    grid-area: 1 / 1;
+    min-width: 0;
+  }
+  .reader-layout .article-head {
+    padding-top: 0;
+  }
+  .reader-layout .prose > :first-child {
+    margin-top: .65em;
+  }
+  .reader-tools {
+    grid-area: 1 / 2;
+    display: block;
+    top: calc(var(--bar) + 22px);
+    padding-inline-start: 24px;
+    border: 0;
+    border-inline-start: 1px solid var(--line);
+  }
+  .reader-tools > div { display: block; }
+  .read-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0 16px;
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .wide-label { display: inline; }
+  .toc summary { font-weight: 650; }
+  .js .toc summary { display: none; }
+  .js .outline-title {
+    display: block;
+    font-size: 15px;
+    font-weight: 650;
+    margin: 18px 0 8px;
+  }
+  .toc-panel {
+    position: static;
+    width: auto;
+    max-height: calc(100vh - var(--bar) - 190px);
+    max-height: calc(100dvh - var(--bar) - 190px);
+    padding: 0 6px 0 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    animation: none;
+    scrollbar-width: thin;
+  }
+  .toc-panel a { color: var(--muted); line-height: 1.5; }
+  .toc-panel a:hover, .toc-panel a[aria-current] { color: var(--accent); }
+  .collection:has(.index-rows) { max-width: 1330px; }
+  .index-rows {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(36px, 5vw, 80px);
+  }
+}
 @media (max-width: 760px) {
   :root {
     --bar: 56px;
@@ -1014,6 +1092,37 @@ p {
 @keyframes reveal-panel {
   from { opacity: 0; transform: translateY(-4px); }
   to { opacity: 1; transform: translateY(0); }
+}
+/* Feedback appears while the native navigation request is in flight. */
+[data-navigating] .masthead::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 2px;
+  background: var(--accent);
+  pointer-events: none;
+}
+.post-row h3 a:active, #site-nav a:active, a[data-pending] {
+  color: var(--accent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  .masthead { view-transition-name: masthead; }
+  ::view-transition-group(root),
+  ::view-transition-group(masthead) { animation-duration: 180ms; }
+  ::view-transition-old(root) { animation: page-out 160ms ease-out both; }
+  ::view-transition-new(root), .page-enter #main {
+    animation: page-in 180ms var(--ease) both;
+  }
+  ::view-transition-old(masthead) { animation: none; opacity: 0; }
+  ::view-transition-new(masthead) { animation: none; }
+}
+@keyframes page-in {
+  from { opacity: .35; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes page-out {
+  to { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   *,

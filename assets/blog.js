@@ -57,6 +57,30 @@ function noteEntry(values) {
 }
 const localPath = (url) => url.pathname + url.search;
 const visitType = performance.getEntriesByType("navigation")[0]?.type;
+function clearNavigationFeedback() {
+  delete document.documentElement.dataset.navigating;
+  document.querySelector("a[data-pending]")?.removeAttribute("data-pending");
+}
+function showNavigationFeedback(link) {
+  clearNavigationFeedback();
+  document.documentElement.dataset.navigating = "";
+  link?.setAttribute("data-pending", "");
+}
+window.navigation?.addEventListener("navigate", (event) => {
+  event.signal.addEventListener("abort", clearNavigationFeedback, { once: true });
+});
+window.addEventListener("pageswap", clearNavigationFeedback);
+window.addEventListener("pagehide", clearNavigationFeedback);
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") clearNavigationFeedback();
+});
+if (!("CSSViewTransitionRule" in window) && visitType === "navigate" &&
+    document.referrer && new URL(document.referrer).origin === location.origin) {
+  document.documentElement.classList.add("page-enter");
+  document.getElementById("main").addEventListener("animationend", (event) => {
+    if (event.animationName === "page-in") document.documentElement.classList.remove("page-enter");
+  });
+}
 try {
   const source = JSON.parse(sessionStorage.getItem(entryKey));
   sessionStorage.removeItem(entryKey);
@@ -87,6 +111,7 @@ document.querySelectorAll("[data-return]").forEach((link) => {
   link.addEventListener("click", (event) => {
     if (!ordinaryClick(event)) return;
     event.preventDefault();
+    showNavigationFeedback(link);
     history.back();
   });
 });
@@ -106,6 +131,7 @@ document.addEventListener("click", (event) => {
     localPath(destination) === localPath(location)
   )
     return;
+  if (destination.pathname.endsWith("/")) showNavigationFeedback(link);
   noteEntry({ scrollY: window.scrollY, focusHref: link.href });
   try {
     sessionStorage.setItem(
@@ -174,6 +200,7 @@ async function renderSearch() {
 }
 const searchReady = renderSearch();
 window.addEventListener("pageshow", async (event) => {
+  clearNavigationFeedback();
   closeMenu();
   try {
     const saved = localStorage.getItem("noctis-theme");
@@ -199,8 +226,8 @@ const bodyText = document.getElementById("article-body");
 if (bodyText) {
   const progress = document.getElementById("progress");
   const percent = document.getElementById("read-percent");
-  const tools = document.querySelector(".reader-tools");
   const toc = document.querySelector(".toc");
+  const wideReader = window.matchMedia("(min-width: 1040px)");
   const links = [...document.querySelectorAll('.toc-panel a[href^="#"]')];
   const sections = links.map((link) =>
     document.getElementById(decodeURIComponent(link.hash.slice(1))),
@@ -213,10 +240,7 @@ if (bodyText) {
     inset = 0;
   function measure() {
     const box = bodyText.getBoundingClientRect();
-    inset =
-      document.querySelector(".masthead").offsetHeight +
-      tools.offsetHeight +
-      16;
+    inset = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
     start = window.scrollY + box.top - inset;
     end = window.scrollY + box.bottom - innerHeight;
     positions = sections.map((el) =>
@@ -247,6 +271,13 @@ if (bodyText) {
     if (current !== activeLink) {
       activeLink?.removeAttribute("aria-current");
       current?.setAttribute("aria-current", "location");
+      if (current && wideReader.matches) {
+        const panel = current.closest(".toc-panel");
+        const bounds = panel.getBoundingClientRect();
+        const item = current.getBoundingClientRect();
+        if (item.top < bounds.top) panel.scrollTop += item.top - bounds.top;
+        else if (item.bottom > bounds.bottom) panel.scrollTop += item.bottom - bounds.bottom;
+      }
       activeLink = current;
     }
   }
@@ -259,6 +290,12 @@ if (bodyText) {
   measure();
   if (toc) {
     const trigger = toc.querySelector("summary");
+    function setOutlineLayout() {
+      toc.open = wideReader.matches;
+      measure();
+    }
+    setOutlineLayout();
+    wideReader.addEventListener("change", setOutlineLayout);
     toc.addEventListener("click", (event) => {
       const link = event.target.closest("a");
       if (!link || !ordinaryClick(event)) return;
@@ -267,7 +304,7 @@ if (bodyText) {
       );
       if (!heading) return;
       event.preventDefault();
-      toc.open = false;
+      if (!wideReader.matches) toc.open = false;
       // Replace the section fragment so Back still returns to the originating list in one step.
       history.replaceState(state(), "", link.hash);
       heading.tabIndex = -1;
@@ -275,10 +312,10 @@ if (bodyText) {
       heading.scrollIntoView({ block: "start" });
     });
     document.addEventListener("click", (event) => {
-      if (toc.open && !toc.contains(event.target)) toc.open = false;
+      if (!wideReader.matches && toc.open && !toc.contains(event.target)) toc.open = false;
     });
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && toc.open) {
+      if (!wideReader.matches && event.key === "Escape" && toc.open) {
         toc.open = false;
         trigger.focus();
       }
